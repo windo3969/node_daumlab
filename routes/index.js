@@ -263,4 +263,71 @@ router.get('/success-cases', (req, res) => {
   });
 });
 
+// routes/index.js에 추가할 지식 구독 플랫폼 라우트
+
+// 지식 구독 플랫폼 서비스 상세 페이지
+router.get('/services/knowledge-platform', (req, res) => {
+  res.render('pages/services/knowledge-platform', {
+    title: '지식 구독 플랫폼 - 매주 도착하는 다움 발견 여정 | 다움연구소',
+    description: '바쁜 일상 속에서도 꾸준히 자신을 탐구할 수 있도록, 매주 정체성 발견을 위한 실용적이고 깊이 있는 콘텐츠를 메일함으로 직접 전달해드립니다.',
+    keywords: '지식구독, 뉴스레터, 정체성탐구, 자기계발, 이메일구독, 다움연구소',
+    canonical: res.locals.siteUrl + '/services/knowledge-platform',
+    additionalCSS: ['/css/knowledge-platform.css'],
+    additionalJS: ['/js/knowledge-platform.js'],
+    // 구조화된 데이터 (SEO)
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "지식 구독 플랫폼",
+      "provider": {
+        "@type": "Organization",
+        "name": "다움연구소"
+      },
+      "description": "매주 정체성 발견을 위한 체계적인 콘텐츠를 이메일로 제공하는 구독 서비스",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "체험판",
+          "price": "0",
+          "priceCurrency": "KRW",
+          "description": "4주간 무료 체험"
+        },
+        {
+          "@type": "Offer",
+          "name": "정기 구독",
+          "price": "19900",
+          "priceCurrency": "KRW",
+          "description": "월간 구독 서비스"
+        },
+        {
+          "@type": "Offer",
+          "name": "연간 구독",
+          "price": "199000",
+          "priceCurrency": "KRW",
+          "description": "연간 구독 서비스 (16% 할인)"
+        }
+      ]
+    }
+  });
+});
+
+// routes/index.js 파일에 추가할 코드
+
+// 조직 다움 워크숍 서비스 상세 페이지
+router.get('/services/organization-workshop', (req, res) => {
+  res.render('pages/organization-workshop', {
+    title: '조직 다움 워크숍 - 조직의 고유한 색깔을 함께 만들어가는 워크숍 | 다움연구소',
+    description: '구성원들이 함께 참여하여 조직만의 정체성과 문화를 발견하고 구축하는 6주간의 체계적인 워크숍 프로그램입니다. 팀워크 향상과 조직 문화 혁신을 동시에 달성하세요.',
+    keywords: '조직 워크숍, 팀빌딩, 조직 문화, 정체성, 다움연구소, 기업 교육, 팀워크',
+    canonical: res.locals.siteUrl + '/services/organization-workshop',
+    additionalCSS: ['/css/organization-workshop.css'],
+    additionalJS: ['/js/organization-workshop.js'],
+    breadcrumb: [
+      { title: '홈', url: '/' },
+      { title: '핵심 사업', url: '/services' },
+      { title: '조직 다움 워크숍', url: '/services/organization-workshop' }
+    ]
+  });
+});
+
 module.exports = router;
