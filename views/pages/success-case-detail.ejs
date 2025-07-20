@@ -1,0 +1,290 @@
+<!-- 개별 성공 사례 상세 페이지 -->
+
+<!-- 페이지 헤더 -->
+<section class="page-header case-detail-header" aria-label="성공 사례 상세">
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-6">
+        <div class="page-header-content">
+          <div class="case-breadcrumb">
+            <a href="/success-cases">성공 사례</a> > <span><%= case.service %></span>
+          </div>
+          <div class="case-meta">
+            <span class="case-tag"><%= case.service %></span>
+            <span class="case-tag secondary"><%= case.age %>세 <%= case.occupation %></span>
+          </div>
+          <h1 class="page-title"><%= case.title %></h1>
+          <p class="page-description"><%= case.summary %></p>
+          <div class="case-author">
+            <span class="author-name"><%= case.name %>님의 이야기</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="page-header-visual">
+          <img src="<%= case.image %>" 
+               alt="<%= case.name %>님의 사례 이미지" 
+               class="img-fluid rounded-3">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 변화 요약 -->
+<section class="section-padding case-summary" aria-label="변화 요약">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="summary-card">
+          <h2 class="summary-title">변화의 핵심 포인트</h2>
+          <div class="before-after-grid">
+            <div class="before-section">
+              <h3 class="section-title">변화 전 (Before)</h3>
+              <ul class="change-list">
+                <% case.beforeAfter.before.forEach(item => { %>
+                  <li class="change-item before">
+                    <i class="bi bi-x-circle" aria-hidden="true"></i>
+                    <span><%= item %></span>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+            <div class="after-section">
+              <h3 class="section-title">변화 후 (After)</h3>
+              <ul class="change-list">
+                <% case.beforeAfter.after.forEach(item => { %>
+                  <li class="change-item after">
+                    <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                    <span><%= item %></span>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 스토리 상세 -->
+<section class="section-padding case-story" aria-label="상세 스토리">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="story-content">
+          <h2 class="story-title">상세 스토리</h2>
+          
+          <div class="story-chapter">
+            <h3 class="chapter-title">🤔 시작: 어떤 고민이 있었나요?</h3>
+            <div class="chapter-content">
+              <% if (case.id === 'kim-jiwon') { %>
+                <p>
+                  대학을 졸업하고 바로 마케팅 회사에 취업했지만, 매일이 고통스러웠습니다. 
+                  다른 사람들은 모두 열정적으로 일하는 것 같은데, 저만 뒤처지는 느낌이었어요.
+                </p>
+                <p>
+                  "내가 정말 이 일에 맞는 사람일까?" "다른 사람들은 어떻게 이렇게 확신을 가지고 살까?" 
+                  이런 생각들이 머릿속을 맴돌았습니다.
+                </p>
+              <% } else if (case.id === 'park-hyunwoo') { %>
+                <p>
+                  20대 후반부터 30대 초반까지 정말 많은 일들을 해봤어요. 
+                  카페 창업, 온라인 쇼핑몰, 교육 컨설팅... 하지만 어느 것 하나 제대로 되는 게 없었습니다.
+                </p>
+                <p>
+                  주변에서는 "너는 한 가지에 집중하지 못한다"는 말을 자주 들었어요. 
+                  저 스스로도 뭘 해야 할지 모르겠고, 정체성에 대한 혼란이 심했습니다.
+                </p>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="story-chapter">
+            <h3 class="chapter-title">💡 전환점: 다움연구소를 만나다</h3>
+            <div class="chapter-content">
+              <% if (case.id === 'kim-jiwon') { %>
+                <p>
+                  친구의 추천으로 다움연구소의 개인 컨설팅을 받게 되었습니다. 
+                  처음에는 반신반의했지만, 첫 상담에서 제가 느끼던 불안감의 원인을 정확히 짚어주시더라고요.
+                </p>
+                <p>
+                  6주간의 컨설팅 과정에서 제가 추구하는 가치, 타고난 강점, 그리고 저에게 맞는 일의 방식을 
+                  체계적으로 발견할 수 있었습니다.
+                </p>
+              <% } else if (case.id === 'park-hyunwoo') { %>
+                <p>
+                  우연히 다움연구소의 뉴스레터를 구독하게 되었어요. 
+                  처음에는 "또 다른 자기계발서냐"라고 생각했는데, 내용이 달랐습니다.
+                </p>
+                <p>
+                  매주 받는 맞춤형 콘텐츠를 통해 제 안에 숨어있던 일관된 패턴과 강점들을 발견하기 시작했어요. 
+                  여러 분야를 경험한 것이 약점이 아니라 저만의 고유한 강점이라는 걸 깨달았습니다.
+                </p>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="story-chapter">
+            <h3 class="chapter-title">🚀 변화: 어떤 변화가 있었나요?</h3>
+            <div class="chapter-content">
+              <% if (case.id === 'kim-jiwon') { %>
+                <p>
+                  가장 큰 변화는 자신감이었어요. 제가 어떤 사람인지, 무엇을 잘하는지 명확해지니까 
+                  일하는 방식도 달라졌습니다. 같은 업무라도 제 방식으로 접근하니까 훨씬 효과적이었어요.
+                </p>
+                <p>
+                  결국 1년 후에는 제가 정말 하고 싶었던 브랜드 전략 분야로 이직했고, 
+                  지금은 매일 아침이 기다려질 정도로 만족스럽게 일하고 있습니다.
+                </p>
+              <% } else if (case.id === 'park-hyunwoo') { %>
+                <p>
+                  6개월의 구독 과정을 통해 제가 '연결자(Connector)' 유형이라는 걸 발견했어요. 
+                  서로 다른 분야의 지식과 사람들을 연결하는 것이 제 강점이었던 거죠.
+                </p>
+                <p>
+                  지금은 '다분야 경험 컨설턴트'라는 저만의 브랜드로 사업을 하고 있어요. 
+                  과거의 '실패' 경험들이 모두 자산이 되었습니다.
+                </p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 고객 증언 -->
+<section class="section-padding customer-testimonial" aria-label="고객 증언">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="testimonial-box">
+          <div class="testimonial-quote">
+            <blockquote class="quote-text">
+              "<%= case.testimonial %>"
+            </blockquote>
+            <cite class="quote-author">- <%= case.name %>님 -</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 관련 서비스 추천 -->
+<section class="section-padding related-services" aria-label="관련 서비스">
+  <div class="container">
+    <div class="section-title-wrapper">
+      <h2 class="section-title"><%= case.name %>님이 이용한 서비스</h2>
+      <p class="section-description">
+        비슷한 고민을 가지고 계신가요? 같은 서비스로 변화를 시작해보세요.
+      </p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="service-recommendation">
+          <% if (case.service === '개인 다움 컨설팅') { %>
+            <div class="service-card">
+              <div class="service-icon">🎯</div>
+              <h3 class="service-title">개인 다움 컨설팅</h3>
+              <p class="service-description">
+                1:1 맞춤형 컨설팅을 통해 당신만의 고유한 정체성과 강점을 발견하고, 
+                구체적인 실행 계획을 세우는 프리미엄 서비스입니다.
+              </p>
+              <div class="service-features">
+                <span class="feature-item">✓ 개인 정체성 진단</span>
+                <span class="feature-item">✓ 1:1 전문가 코칭</span>
+                <span class="feature-item">✓ 맞춤형 실행 계획</span>
+              </div>
+              <a href="/services/personal-consulting" class="btn-service">서비스 자세히 보기</a>
+            </div>
+          <% } else if (case.service === '지식 구독 플랫폼') { %>
+            <div class="service-card">
+              <div class="service-icon">📨</div>
+              <h3 class="service-title">지식 구독 플랫폼</h3>
+              <p class="service-description">
+                개인 맞춤형 인사이트를 정기적으로 받아보며 점진적으로 
+                자신만의 정체성을 발견해 나가는 구독 서비스입니다.
+              </p>
+              <div class="service-features">
+                <span class="feature-item">✓ 주간 맞춤 뉴스레터</span>
+                <span class="feature-item">✓ 실용적 성장 도구</span>
+                <span class="feature-item">✓ 커뮤니티 참여</span>
+              </div>
+              <a href="/services/knowledge-platform" class="btn-service">서비스 자세히 보기</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 사례 보기 -->
+<section class="section-padding other-cases" aria-label="다른 사례">
+  <div class="container">
+    <div class="section-title-wrapper">
+      <h2 class="section-title">다른 성공 사례도 확인해보세요</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="mini-case-card">
+          <img src="/images/cases/lee-sujin.jpg" alt="이수진님 사례" class="mini-case-img">
+          <div class="mini-case-content">
+            <h4 class="mini-case-title">학업과 꿈 사이에서 길을 찾았습니다</h4>
+            <p class="mini-case-author">이수진님 (25세 대학원생)</p>
+            <a href="/success-cases/lee-sujin" class="mini-case-link">사례 보기</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mini-case-card">
+          <img src="/images/cases/jung-minho.jpg" alt="정민호님 사례" class="mini-case-img">
+          <div class="mini-case-content">
+            <h4 class="mini-case-title">매일 반복되는 일상에서 의미를 찾았습니다</h4>
+            <p class="mini-case-author">정민호님 (29세 직장인)</p>
+            <a href="/success-cases/jung-minho" class="mini-case-link">사례 보기</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mini-case-card">
+          <img src="/images/cases/startup-a.jpg" alt="스타트업 A 사례" class="mini-case-img">
+          <div class="mini-case-content">
+            <h4 class="mini-case-title">급성장하는 스타트업의 문화 정착기</h4>
+            <p class="mini-case-author">A 스타트업 (IT 회사)</p>
+            <a href="/success-cases/startup-a" class="mini-case-link">사례 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/success-cases" class="btn-daum">모든 성공 사례 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 섹션 -->
+<section class="section-padding case-detail-cta" aria-label="상담 신청">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="cta-title">당신도 <%= case.name %>님처럼 변화할 수 있습니다</h2>
+        <p class="cta-description">
+          <%= case.name %>님이 경험한 것과 같은 변화를<br>
+          당신도 시작해보세요.
+        </p>
+        <div class="cta-buttons">
+          <a href="/consulting-apply" class="btn-daum primary">무료 상담 신청</a>
+          <a href="/contact" class="btn-daum">문의하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

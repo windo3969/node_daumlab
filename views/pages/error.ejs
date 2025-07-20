@@ -1,0 +1,165 @@
+<!-- 에러 페이지 -->
+<section class="error-page section-padding" aria-label="에러 페이지">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <div class="error-content">
+          <!-- 에러 상태별 아이콘 -->
+          <div class="error-icon mb-4">
+            <% if (status === 404) { %>
+              <i class="bi bi-exclamation-triangle" style="font-size: 5rem; color: var(--secondary);"></i>
+            <% } else if (status === 500) { %>
+              <i class="bi bi-gear-wide-connected" style="font-size: 5rem; color: var(--secondary);"></i>
+            <% } else { %>
+              <i class="bi bi-question-circle" style="font-size: 5rem; color: var(--secondary);"></i>
+            <% } %>
+          </div>
+
+          <!-- 에러 메시지 -->
+          <h1 class="error-title">
+            <% if (status === 404) { %>
+              페이지를 찾을 수 없습니다
+            <% } else if (status === 500) { %>
+              서버 오류가 발생했습니다
+            <% } else { %>
+              오류가 발생했습니다
+            <% } %>
+          </h1>
+
+          <p class="error-description">
+            <%= error %>
+          </p>
+
+          <!-- 추가 안내 메시지 -->
+          <div class="error-help mt-4">
+            <% if (status === 404) { %>
+              <p>요청하신 페이지가 삭제되었거나 주소가 변경되었을 수 있습니다.</p>
+              <p>아래 링크를 통해 원하시는 정보를 찾아보세요.</p>
+            <% } else if (status === 500) { %>
+              <p>일시적인 서버 문제로 인해 서비스를 이용할 수 없습니다.</p>
+              <p>잠시 후 다시 시도해주시거나, 문제가 지속되면 고객센터로 문의해주세요.</p>
+            <% } else { %>
+              <p>예상치 못한 문제가 발생했습니다.</p>
+              <p>잠시 후 다시 시도해주시거나, 고객센터로 문의해주세요.</p>
+            <% } %>
+          </div>
+
+          <!-- 행동 버튼들 -->
+          <div class="error-actions mt-5">
+            <a href="/" 
+               class="btn-daum primary me-3 mb-3 mb-md-0"
+               aria-label="홈페이지로 이동">
+              <i class="bi bi-house me-2"></i>
+              홈페이지로 이동
+            </a>
+            
+            <% if (status === 404) { %>
+              <a href="/sitemap" 
+                 class="btn-daum mb-3 mb-md-0 me-3"
+                 aria-label="사이트맵 보기">
+                <i class="bi bi-map me-2"></i>
+                사이트맵 보기
+              </a>
+            <% } %>
+
+            <a href="/contact" 
+               class="btn-daum"
+               aria-label="고객센터 문의">
+              <i class="bi bi-headset me-2"></i>
+              고객센터 문의
+            </a>
+          </div>
+
+          <!-- 검색 기능 (404 에러일 때만) -->
+          <% if (status === 404) { %>
+          <div class="error-search mt-5">
+            <h3 class="h5 mb-3">페이지 검색</h3>
+            <form class="d-flex justify-content-center" role="search">
+              <div class="input-group" style="max-width: 400px;">
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="찾으시는 페이지나 내용을 검색해보세요"
+                       aria-label="페이지 검색">
+                <button class="btn btn-primary" 
+                        type="submit"
+                        aria-label="검색하기">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <% } %>
+
+          <!-- 인기 페이지 링크 -->
+          <div class="popular-links mt-5">
+            <h3 class="h5 mb-3">인기 페이지</h3>
+            <div class="row g-2 justify-content-center">
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-clock me-2 text-primary"></i>
+                  <div>
+                    <small class="text-muted d-block">운영시간</small>
+                    <span>평일 09:00-18:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>auto">
+                <a href="/services" 
+                   class="btn btn-outline-primary btn-sm"
+                   aria-label="서비스 페이지로 이동">
+                  서비스 소개
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="/success-cases" 
+                   class="btn btn-outline-primary btn-sm"
+                   aria-label="성공 사례 페이지로 이동">
+                  성공 사례
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="/pricing" 
+                   class="btn btn-outline-primary btn-sm"
+                   aria-label="요금제 페이지로 이동">
+                  요금제
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="/about" 
+                   class="btn btn-outline-primary btn-sm"
+                   aria-label="회사 소개 페이지로 이동">
+                  회사 소개
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 연락처 정보 -->
+          <div class="contact-info mt-5 p-4 bg-light rounded">
+            <h4 class="h6 mb-3">문의가 있으시면 언제든 연락주세요</h4>
+            <div class="row g-3 text-start">
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-telephone me-2 text-primary"></i>
+                  <div>
+                    <small class="text-muted d-block">전화</small>
+                    <a href="tel:+82-2-123-4567" class="text-decoration-none">02-123-4567</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-envelope me-2 text-primary"></i>
+                  <div>
+                    <small class="text-muted d-block">이메일</small>
+                    <a href="mailto:info@daum-institute.kr" class="text-decoration-none">info@daum-institute.kr</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-
