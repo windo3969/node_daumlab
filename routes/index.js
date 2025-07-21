@@ -341,4 +341,69 @@ router.get('/services/personal-consulting', (req, res) => {
   });
 });
 
+// 핵심 사업 (서비스 전체 소개)
+router.get('/services', (req, res) => {
+  res.render('pages/services', {
+    title: '핵심 사업 - 다움연구소',
+    description: '개인 다움 컨설팅, 조직 다움 워크숍, 지식 구독 플랫폼, 콘텐츠 개발 등 다움연구소의 4가지 핵심 서비스를 소개합니다.',
+    keywords: '다움연구소, 서비스, 컨설팅, 워크숍, 구독, 콘텐츠 개발',
+    canonical: res.locals.siteUrl + '/services',
+    additionalCSS: ['/css/services.css'],
+    additionalJS: ['/js/services.js'],
+    // 페이지별 메타데이터
+    pageType: 'services',
+    breadcrumb: [
+      { title: '홈', url: '/' },
+      { title: '핵심 사업', url: '/services' }
+    ],
+    // 구조화된 데이터 (JSON-LD)
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "다움연구소",
+      "description": "개인과 조직의 정체성 발견을 돕는 전문 연구기관",
+      "url": res.locals.siteUrl + "/services",
+      "service": [
+        {
+          "@type": "Service",
+          "name": "개인 다움 컨설팅",
+          "description": "1:1 맞춤형 컨설팅을 통한 개인 정체성 발견 및 브랜딩",
+          "provider": {
+            "@type": "Organization",
+            "name": "다움연구소"
+          }
+        },
+        {
+          "@type": "Service", 
+          "name": "지식 구독 플랫폼",
+          "description": "매주 전달되는 정체성 탐구 콘텐츠 구독 서비스",
+          "provider": {
+            "@type": "Organization",
+            "name": "다움연구소"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "조직 다움 워크숍", 
+          "description": "조직 정체성과 문화 구축을 위한 체계적 워크숍",
+          "provider": {
+            "@type": "Organization",
+            "name": "다움연구소"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "콘텐츠 개발 및 배포",
+          "description": "정체성과 브랜딩 관련 맞춤형 교육자료 개발",
+          "provider": {
+            "@type": "Organization", 
+            "name": "다움연구소"
+          }
+        }
+      ]
+    }
+  });
+});
+
+
 module.exports = router;

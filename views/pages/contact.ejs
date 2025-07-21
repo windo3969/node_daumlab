@@ -1,0 +1,552 @@
+<!-- 문의하기 페이지 헤더 -->
+<section class="page-header contact-header" aria-label="문의하기">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="page-header-content">
+                    <span class="page-subtitle">CONTACT US</span>
+                    <h1 class="page-title">
+                        언제든 <span class="text-secondary">편하게</span><br>
+                        문의해 주세요
+                    </h1>
+                    <p class="page-description">
+                        다움연구소에 궁금한 점이 있으시거나 상담이 필요하시면 언제든 연락주세요. 
+                        전문 상담원이 신속하고 정확하게 답변드리겠습니다.
+                    </p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>전화 문의</h3>
+                                <p>02-123-4567</p>
+                                <small>평일 09:00-18:00</small>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>이메일 문의</h3>
+                                <p>info@daum-institute.kr</p>
+                                <small>24시간 접수 가능</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="page-header-image">
+                    <img src="/images/contact/contact-illustration.jpg" alt="다움연구소 상담 담당자가 친근하게 상담하는 모습" 
+                         class="img-fluid rounded-3" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 문의 폼 섹션 -->
+<section class="section-padding contact-form-section" aria-label="문의 폼">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- 성공/에러 메시지 -->
+                <% if (typeof showSuccess !== 'undefined' && showSuccess) { %>
+                <div class="alert alert-success" role="alert">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <%= successMessage %>
+                </div>
+                <% } %>
+
+                <% if (typeof showError !== 'undefined' && showError) { %>
+                <div class="alert alert-danger" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <% if (errors.length > 0) { %>
+                        <ul class="mb-0">
+                            <% errors.forEach(error => { %>
+                            <li><%= error.msg %></li>
+                            <% }) %>
+                        </ul>
+                    <% } %>
+                </div>
+                <% } %>
+
+                <!-- 문의 폼 -->
+                <form method="POST" action="/contact" class="contact-form" novalidate>
+                    <div class="form-header">
+                        <h2 class="form-title">문의사항을 남겨주세요</h2>
+                        <p class="form-description">
+                            아래 양식을 작성해주시면 담당자가 빠르게 연락드리겠습니다.
+                        </p>
+                    </div>
+
+                    <div class="row g-3">
+                        <!-- 이름 -->
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">이름 <span class="text-danger">*</span></label>
+                            <input type="text" 
+                                   class="form-control <%= errors.some(e => e.path === 'name') ? 'is-invalid' : '' %>" 
+                                   id="name" 
+                                   name="name" 
+                                   value="<%= formData.name || '' %>"
+                                   placeholder="성함을 입력해주세요"
+                                   required>
+                        </div>
+
+                        <!-- 이메일 -->
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                            <input type="email" 
+                                   class="form-control <%= errors.some(e => e.path === 'email') ? 'is-invalid' : '' %>" 
+                                   id="email" 
+                                   name="email" 
+                                   value="<%= formData.email || '' %>"
+                                   placeholder="example@email.com"
+                                   required>
+                        </div>
+
+                        <!-- 전화번호 -->
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">전화번호 <span class="text-danger">*</span></label>
+                            <input type="tel" 
+                                   class="form-control <%= errors.some(e => e.path === 'phone') ? 'is-invalid' : '' %>" 
+                                   id="phone" 
+                                   name="phone" 
+                                   value="<%= formData.phone || '' %>"
+                                   placeholder="010-0000-0000"
+                                   pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}"
+                                   required>
+                        </div>
+
+                        <!-- 문의 유형 -->
+                        <div class="col-md-6">
+                            <label for="inquiry-type" class="form-label">문의 유형</label>
+                            <select class="form-select" id="inquiry-type" name="inquiryType">
+                                <option value="general" <%= formData.inquiryType === 'general' ? 'selected' : '' %>>일반 문의</option>
+                                <option value="service" <%= formData.inquiryType === 'service' ? 'selected' : '' %>>서비스 문의</option>
+                                <option value="partnership" <%= formData.inquiryType === 'partnership' ? 'selected' : '' %>>제휴 문의</option>
+                                <option value="media" <%= formData.inquiryType === 'media' ? 'selected' : '' %>>언론 문의</option>
+                                <option value="other" <%= formData.inquiryType === 'other' ? 'selected' : '' %>>기타</option>
+                            </select>
+                        </div>
+
+                        <!-- 제목 -->
+                        <div class="col-12">
+                            <label for="subject" class="form-label">제목 <span class="text-danger">*</span></label>
+                            <input type="text" 
+                                   class="form-control <%= errors.some(e => e.path === 'subject') ? 'is-invalid' : '' %>" 
+                                   id="subject" 
+                                   name="subject" 
+                                   value="<%= formData.subject || '' %>"
+                                   placeholder="문의 제목을 입력해주세요"
+                                   required>
+                        </div>
+
+                        <!-- 문의 내용 -->
+                        <div class="col-12">
+                            <label for="message" class="form-label">문의 내용 <span class="text-danger">*</span></label>
+                            <textarea class="form-control <%= errors.some(e => e.path === 'message') ? 'is-invalid' : '' %>" 
+                                      id="message" 
+                                      name="message" 
+                                      rows="6" 
+                                      placeholder="궁금한 점이나 상담받고 싶은 내용을 자세히 적어주세요" 
+                                      required><%= formData.message || '' %></textarea>
+                        </div>
+
+                        <!-- 개인정보 동의 -->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="privacy-agree" name="privacyAgree" required>
+                                <label class="form-check-label" for="privacy-agree">
+                                    개인정보 수집 및 이용에 동의합니다. <span class="text-danger">*</span>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-decoration-underline">
+                                        (자세히 보기)
+                                    </a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 제출 버튼 -->
+                        <div class="col-12">
+                            <button type="submit" class="btn-submit">
+                                <span class="btn-text">문의하기</span>
+                                <span class="loading-spinner d-none">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 연락처 정보 섹션 -->
+<section class="section-padding contact-info-section" aria-label="연락처 정보">
+    <div class="container">
+        <div class="row g-4">
+            <!-- 방문 상담 -->
+            <div class="col-lg-4">
+                <div class="contact-info-card">
+                    <div class="card-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h3 class="card-title">방문 상담</h3>
+                    <div class="card-content">
+                        <p class="address">
+                            서울특별시 강남구 테헤란로 123, 8층<br>
+                            (역삼동, 다움타워)
+                        </p>
+                        <p class="hours">
+                            <strong>운영시간</strong><br>
+                            평일: 09:00 - 18:00<br>
+                            토요일: 09:00 - 15:00 (예약제)<br>
+                            <small class="text-muted">일요일 및 공휴일 휴무</small>
+                        </p>
+                        <div class="transport-info">
+                            <small class="text-muted">
+                                지하철 2호선 역삼역 3번 출구 도보 5분
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 전화 상담 -->
+            <div class="col-lg-4">
+                <div class="contact-info-card">
+                    <div class="card-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <h3 class="card-title">전화 상담</h3>
+                    <div class="card-content">
+                        <p class="phone-main">
+                            <strong>대표번호:</strong> 02-123-4567
+                        </p>
+                        <p class="phone-detail">
+                            <strong>컨설팅 문의:</strong> 02-123-4568<br>
+                            <strong>기업 문의:</strong> 02-123-4569
+                        </p>
+                        <div class="call-guide">
+                            <small class="text-muted">
+                                통화량이 많을 경우 대기시간이 발생할 수 있습니다.<br>
+                                온라인 문의를 이용하시면 더 빠른 답변을 받으실 수 있습니다.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 온라인 상담 -->
+            <div class="col-lg-4">
+                <div class="contact-info-card">
+                    <div class="card-icon">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+                    <h3 class="card-title">온라인 상담</h3>
+                    <div class="card-content">
+                        <p class="email-main">
+                            <strong>일반 문의:</strong><br>
+                            info@daum-institute.kr
+                        </p>
+                        <p class="email-detail">
+                            <strong>컨설팅 문의:</strong><br>
+                            consulting@daum-institute.kr<br>
+                            <strong>제휴 문의:</strong><br>
+                            partnership@daum-institute.kr
+                        </p>
+                        <div class="response-time">
+                            <small class="text-success">
+                                <i class="bi bi-clock"></i>
+                                평균 응답시간: 영업일 기준 2-4시간
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ 안내 -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="faq-notice">
+                    <div class="notice-content">
+                        <div class="notice-icon">
+                            <i class="bi bi-question-circle-fill"></i>
+                        </div>
+                        <div class="notice-text">
+                            <h4>자주 묻는 질문</h4>
+                            <p>문의하기 전에 FAQ를 확인해보시면 더 빠른 답변을 얻으실 수 있습니다.</p>
+                        </div>
+                        <div class="notice-action">
+                            <a href="/faq" class="btn-outline">FAQ 보기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 개인정보 처리방침 모달 -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="privacyModalLabel">개인정보 수집 및 이용 동의</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-content">
+                    <h6>1. 개인정보 수집 목적</h6>
+                    <p>문의 내용 확인 및 답변, 서비스 상담 제공</p>
+
+                    <h6>2. 수집하는 개인정보 항목</h6>
+                    <ul>
+                        <li>필수 항목: 이름, 이메일, 전화번호, 문의 내용</li>
+                        <li>선택 항목: 문의 유형</li>
+                    </ul>
+
+                    <h6>3. 개인정보 보유 및 이용 기간</h6>
+                    <p>문의 접수일로부터 3년간 보관 후 파기</p>
+
+                    <h6>4. 개인정보 제공 거부권</h6>
+                    <p>귀하는 개인정보 제공을 거부할 권리가 있으나, 거부 시 문의 서비스 이용이 제한될 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* 문의하기 페이지 전용 스타일 */
+.contact-header {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    color: var(--white);
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.method-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.method-info h3 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.method-info p {
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.method-info small {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+}
+
+.contact-form-section {
+    background: var(--gray-50);
+}
+
+.contact-form {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-title {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-description {
+    color: var(--gray-600);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.contact-info-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    height: 100%;
+    transition: var(--transition-base);
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--secondary), #e6b885);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.8rem;
+    color: var(--white);
+}
+
+.card-title {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-content {
+    text-align: left;
+}
+
+.faq-notice {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    border-radius: var(--border-radius-xl);
+    padding: 2rem;
+    color: var(--white);
+}
+
+.notice-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.notice-icon {
+    font-size: 2.5rem;
+    color: var(--secondary);
+    flex-shrink: 0;
+}
+
+.notice-text h4 {
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.notice-text p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
+/* 반응형 */
+@media (max-width: 767.98px) {
+    .contact-form {
+        padding: 2rem;
+    }
+    
+    .form-title {
+        font-size: 1.6rem;
+    }
+    
+    .contact-methods {
+        gap: 1rem;
+    }
+    
+    .contact-method {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .method-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .notice-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+
+<script>
+// 폼 제출 처리
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form');
+    const submitBtn = form.querySelector('.btn-submit');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const loadingSpinner = submitBtn.querySelector('.loading-spinner');
+
+    form.addEventListener('submit', function() {
+        submitBtn.disabled = true;
+        btnText.classList.add('d-none');
+        loadingSpinner.classList.remove('d-none');
+    });
+
+    // 전화번호 자동 포맷팅
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/[^0-9]/g, '');
+        if (value.length >= 3) {
+            value = value.substring(0, 3) + '-' + value.substring(3);
+        }
+        if (value.length >= 8) {
+            value = value.substring(0, 8) + '-' + value.substring(8, 12);
+        }
+        e.target.value = value;
+    });
+});
+</script>

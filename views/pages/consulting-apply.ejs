@@ -1,0 +1,746 @@
+<!-- 컨설팅 신청 페이지 헤더 -->
+<section class="page-header consulting-header" aria-label="컨설팅 신청">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="page-header-content">
+                    <span class="page-subtitle">CONSULTING APPLY</span>
+                    <h1 class="page-title">
+                        당신만의 <span class="text-secondary">다움</span>을<br>
+                        발견하는 여정을 시작하세요
+                    </h1>
+                    <p class="page-description">
+                        개인과 조직의 고유한 정체성을 찾아가는 전문 컨설팅 서비스입니다. 
+                        맞춤형 솔루션으로 진정한 경쟁력을 만들어드립니다.
+                    </p>
+                    <div class="consulting-benefits">
+                        <div class="benefit-item">
+                            <i class="bi bi-check-circle-fill text-secondary"></i>
+                            <span>1:1 맞춤형 컨설팅</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="bi bi-check-circle-fill text-secondary"></i>
+                            <span>체계적인 정체성 진단</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="bi bi-check-circle-fill text-secondary"></i>
+                            <span>실행 가능한 액션플랜 제공</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="bi bi-check-circle-fill text-secondary"></i>
+                            <span>지속적인 후속 관리</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="page-header-image">
+                    <img src="/images/consulting/consulting-illustration.jpg" alt="전문 컨설턴트와 고객이 함께 상담하는 모습" 
+                         class="img-fluid rounded-3" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 컨설팅 신청 폼 섹션 -->
+<section class="section-padding consulting-form-section" aria-label="컨설팅 신청 폼">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- 성공/에러 메시지 -->
+                <% if (typeof showSuccess !== 'undefined' && showSuccess) { %>
+                <div class="alert alert-success" role="alert">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <%= successMessage %>
+                </div>
+                <% } %>
+
+                <% if (typeof showError !== 'undefined' && showError) { %>
+                <div class="alert alert-danger" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <% if (errors.length > 0) { %>
+                        <ul class="mb-0">
+                            <% errors.forEach(error => { %>
+                            <li><%= error.msg %></li>
+                            <% }) %>
+                        </ul>
+                    <% } %>
+                </div>
+                <% } %>
+
+                <!-- 컨설팅 신청 폼 -->
+                <form method="POST" action="/consulting-apply" class="consulting-form" novalidate>
+                    <div class="form-header">
+                        <h2 class="form-title">컨설팅 신청서</h2>
+                        <p class="form-description">
+                            아래 정보를 상세히 작성해주시면 맞춤형 컨설팅 제안서를 제공해드립니다.
+                        </p>
+                    </div>
+
+                    <!-- 단계 1: 기본 정보 -->
+                    <div class="form-step" id="step-1">
+                        <h3 class="step-title">
+                            <span class="step-number">1</span>
+                            기본 정보
+                        </h3>
+
+                        <div class="row g-3">
+                            <!-- 이름 -->
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">이름 <span class="text-danger">*</span></label>
+                                <input type="text" 
+                                       class="form-control <%= errors.some(e => e.path === 'name') ? 'is-invalid' : '' %>" 
+                                       id="name" 
+                                       name="name" 
+                                       value="<%= formData.name || '' %>"
+                                       placeholder="성함을 입력해주세요"
+                                       required>
+                            </div>
+
+                            <!-- 이메일 -->
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                                <input type="email" 
+                                       class="form-control <%= errors.some(e => e.path === 'email') ? 'is-invalid' : '' %>" 
+                                       id="email" 
+                                       name="email" 
+                                       value="<%= formData.email || '' %>"
+                                       placeholder="example@email.com"
+                                       required>
+                            </div>
+
+                            <!-- 전화번호 -->
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">전화번호 <span class="text-danger">*</span></label>
+                                <input type="tel" 
+                                       class="form-control <%= errors.some(e => e.path === 'phone') ? 'is-invalid' : '' %>" 
+                                       id="phone" 
+                                       name="phone" 
+                                       value="<%= formData.phone || '' %>"
+                                       placeholder="010-0000-0000"
+                                       pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}"
+                                       required>
+                            </div>
+
+                            <!-- 회사/소속 -->
+                            <div class="col-md-6">
+                                <label for="company" class="form-label">회사/소속</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="company" 
+                                       name="company" 
+                                       value="<%= formData.company || '' %>"
+                                       placeholder="소속 회사나 단체를 입력해주세요">
+                            </div>
+
+                            <!-- 직책 -->
+                            <div class="col-md-6">
+                                <label for="position" class="form-label">직책/역할</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="position" 
+                                       name="position" 
+                                       value="<%= formData.position || '' %>"
+                                       placeholder="현재 직책이나 역할을 입력해주세요">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 단계 2: 서비스 선택 -->
+                    <div class="form-step" id="step-2">
+                        <h3 class="step-title">
+                            <span class="step-number">2</span>
+                            서비스 선택
+                        </h3>
+
+                        <div class="service-selection">
+                            <!-- 개인 다움 컨설팅 -->
+                            <div class="service-option">
+                                <input type="radio" 
+                                       class="service-radio" 
+                                       id="personal" 
+                                       name="serviceType" 
+                                       value="personal"
+                                       <%= formData.serviceType === 'personal' ? 'checked' : '' %>
+                                       required>
+                                <label for="personal" class="service-label">
+                                    <div class="service-icon">🎨</div>
+                                    <div class="service-content">
+                                        <h4 class="service-name">개인 다움 컨설팅</h4>
+                                        <p class="service-desc">1:1 맞춤형 개인 정체성 발견 및 브랜딩</p>
+                                        <span class="service-duration">6-12주 프로그램</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- 조직 다움 워크숍 -->
+                            <div class="service-option">
+                                <input type="radio" 
+                                       class="service-radio" 
+                                       id="organization" 
+                                       name="serviceType" 
+                                       value="organization"
+                                       <%= formData.serviceType === 'organization' ? 'checked' : '' %>
+                                       required>
+                                <label for="organization" class="service-label">
+                                    <div class="service-icon">🤝</div>
+                                    <div class="service-content">
+                                        <h4 class="service-name">조직 다움 워크숍</h4>
+                                        <p class="service-desc">팀/조직의 정체성과 문화 구축</p>
+                                        <span class="service-duration">6주 워크숍</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- 지식 구독 플랫폼 -->
+                            <div class="service-option">
+                                <input type="radio" 
+                                       class="service-radio" 
+                                       id="knowledge" 
+                                       name="serviceType" 
+                                       value="knowledge"
+                                       <%= formData.serviceType === 'knowledge' ? 'checked' : '' %>
+                                       required>
+                                <label for="knowledge" class="service-label">
+                                    <div class="service-icon">📚</div>
+                                    <div class="service-content">
+                                        <h4 class="service-name">지식 구독 플랫폼</h4>
+                                        <p class="service-desc">정체성 탐구 콘텐츠 구독 서비스</p>
+                                        <span class="service-duration">월간/연간 구독</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- 콘텐츠 개발 -->
+                            <div class="service-option">
+                                <input type="radio" 
+                                       class="service-radio" 
+                                       id="content" 
+                                       name="serviceType" 
+                                       value="content"
+                                       <%= formData.serviceType === 'content' ? 'checked' : '' %>
+                                       required>
+                                <label for="content" class="service-label">
+                                    <div class="service-icon">🎯</div>
+                                    <div class="service-content">
+                                        <h4 class="service-name">콘텐츠 개발</h4>
+                                        <p class="service-desc">맞춤형 교육자료 및 프로그램 개발</p>
+                                        <span class="service-duration">프로젝트 기반</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 단계 3: 예산 및 일정 -->
+                    <div class="form-step" id="step-3">
+                        <h3 class="step-title">
+                            <span class="step-number">3</span>
+                            예산 및 일정
+                        </h3>
+
+                        <div class="row g-3">
+                            <!-- 예산 범위 -->
+                            <div class="col-md-6">
+                                <label for="budget" class="form-label">예산 범위 <span class="text-danger">*</span></label>
+                                <select class="form-select <%= errors.some(e => e.path === 'budget') ? 'is-invalid' : '' %>" 
+                                        id="budget" 
+                                        name="budget" 
+                                        required>
+                                    <option value="">예산 범위를 선택해주세요</option>
+                                    <option value="under-50" <%= formData.budget === 'under-50' ? 'selected' : '' %>>50만원 미만</option>
+                                    <option value="50-100" <%= formData.budget === '50-100' ? 'selected' : '' %>>50-100만원</option>
+                                    <option value="100-300" <%= formData.budget === '100-300' ? 'selected' : '' %>>100-300만원</option>
+                                    <option value="300-500" <%= formData.budget === '300-500' ? 'selected' : '' %>>300-500만원</option>
+                                    <option value="over-500" <%= formData.budget === 'over-500' ? 'selected' : '' %>>500만원 이상</option>
+                                    <option value="discuss" <%= formData.budget === 'discuss' ? 'selected' : '' %>>협의</option>
+                                </select>
+                            </div>
+
+                            <!-- 희망 일정 -->
+                            <div class="col-md-6">
+                                <label for="timeline" class="form-label">희망 일정 <span class="text-danger">*</span></label>
+                                <select class="form-select <%= errors.some(e => e.path === 'timeline') ? 'is-invalid' : '' %>" 
+                                        id="timeline" 
+                                        name="timeline" 
+                                        required>
+                                    <option value="">희망 일정을 선택해주세요</option>
+                                    <option value="urgent" <%= formData.timeline === 'urgent' ? 'selected' : '' %>>긴급 (1주일 내)</option>
+                                    <option value="within-month" <%= formData.timeline === 'within-month' ? 'selected' : '' %>>1개월 내</option>
+                                    <option value="within-quarter" <%= formData.timeline === 'within-quarter' ? 'selected' : '' %>>3개월 내</option>
+                                    <option value="flexible" <%= formData.timeline === 'flexible' ? 'selected' : '' %>>일정 협의</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 단계 4: 상세 정보 -->
+                    <div class="form-step" id="step-4">
+                        <h3 class="step-title">
+                            <span class="step-number">4</span>
+                            상세 정보
+                        </h3>
+
+                        <div class="row g-3">
+                            <!-- 목표 및 기대사항 -->
+                            <div class="col-12">
+                                <label for="goals" class="form-label">목표 및 기대사항 <span class="text-danger">*</span></label>
+                                <textarea class="form-control <%= errors.some(e => e.path === 'goals') ? 'is-invalid' : '' %>" 
+                                          id="goals" 
+                                          name="goals" 
+                                          rows="4" 
+                                          placeholder="컨설팅을 통해 달성하고 싶은 목표와 기대하는 결과를 구체적으로 작성해주세요" 
+                                          required><%= formData.goals || '' %></textarea>
+                            </div>
+
+                            <!-- 현재 고민사항 -->
+                            <div class="col-12">
+                                <label for="challenges" class="form-label">현재 고민사항 <span class="text-danger">*</span></label>
+                                <textarea class="form-control <%= errors.some(e => e.path === 'challenges') ? 'is-invalid' : '' %>" 
+                                          id="challenges" 
+                                          name="challenges" 
+                                          rows="4" 
+                                          placeholder="현재 겪고 있는 어려움이나 해결하고 싶은 문제를 자세히 설명해주세요" 
+                                          required><%= formData.challenges || '' %></textarea>
+                            </div>
+
+                            <!-- 추가 요청사항 -->
+                            <div class="col-12">
+                                <label for="additional" class="form-label">추가 요청사항</label>
+                                <textarea class="form-control" 
+                                          id="additional" 
+                                          name="additional" 
+                                          rows="3" 
+                                          placeholder="기타 요청사항이나 특별히 고려해야 할 사항이 있다면 작성해주세요"><%= formData.additional || '' %></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 개인정보 동의 및 제출 -->
+                    <div class="form-footer">
+                        <!-- 개인정보 동의 -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="privacy-agree" name="privacyAgree" required>
+                            <label class="form-check-label" for="privacy-agree">
+                                개인정보 수집 및 이용에 동의합니다. <span class="text-danger">*</span>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-decoration-underline">
+                                    (자세히 보기)
+                                </a>
+                            </label>
+                        </div>
+
+                        <!-- 제출 버튼 -->
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">컨설팅 신청하기</span>
+                            <span class="loading-spinner d-none">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 컨설팅 진행 과정 섹션 -->
+<section class="section-padding process-section" aria-label="컨설팅 진행 과정">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="section-subtitle">PROCESS</span>
+            <h2 class="section-title">컨설팅 진행 과정</h2>
+            <p class="section-description">
+                체계적이고 전문적인 프로세스로 최고의 결과를 만들어드립니다
+            </p>
+        </div>
+
+        <div class="process-timeline">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-num">1</span>
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+                        <h3 class="step-title">신청 검토</h3>
+                        <p class="step-desc">
+                            신청 내용을 검토하고 담당 컨설턴트를 배정합니다. (1-2일)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-num">2</span>
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <h3 class="step-title">전화 상담</h3>
+                        <p class="step-desc">
+                            담당 컨설턴트와 1:1 전화 상담을 통해 니즈를 파악합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-num">3</span>
+                            <i class="bi bi-file-text"></i>
+                        </div>
+                        <h3 class="step-title">제안서 제공</h3>
+                        <p class="step-desc">
+                            맞춤형 컨설팅 제안서와 상세한 견적서를 제공합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-num">4</span>
+                            <i class="bi bi-rocket-takeoff"></i>
+                        </div>
+                        <h3 class="step-title">컨설팅 시작</h3>
+                        <p class="step-desc">
+                            계약 체결 후 본격적인 컨설팅 프로그램을 시작합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 개인정보 처리방침 모달 -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="privacyModalLabel">개인정보 수집 및 이용 동의</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-content">
+                    <h6>1. 개인정보 수집 목적</h6>
+                    <p>컨설팅 서비스 제공, 상담 및 계약 체결, 사후 관리</p>
+
+                    <h6>2. 수집하는 개인정보 항목</h6>
+                    <ul>
+                        <li>필수 항목: 이름, 이메일, 전화번호, 서비스 유형, 예산, 일정, 목표, 고민사항</li>
+                        <li>선택 항목: 회사/소속, 직책, 추가 요청사항</li>
+                    </ul>
+
+                    <h6>3. 개인정보 보유 및 이용 기간</h6>
+                    <p>컨설팅 서비스 완료일로부터 5년간 보관 후 파기</p>
+
+                    <h6>4. 개인정보 제공 거부권</h6>
+                    <p>귀하는 개인정보 제공을 거부할 권리가 있으나, 거부 시 컨설팅 서비스 이용이 제한될 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* 컨설팅 신청 페이지 전용 스타일 */
+.consulting-header {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    color: var(--white);
+}
+
+.consulting-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.benefit-item i {
+    font-size: 1.2rem;
+}
+
+.consulting-form-section {
+    background: var(--gray-50);
+}
+
+.consulting-form {
+    background: var(--white);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.form-header {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.form-title {
+    color: var(--white);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.form-step {
+    padding: 2.5rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.form-step:last-of-type {
+    border-bottom: none;
+}
+
+.step-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--secondary), #e6b885);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.service-selection {
+    display: grid;
+    gap: 1rem;
+}
+
+.service-option {
+    position: relative;
+}
+
+.service-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.service-label {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-base);
+    background: var(--white);
+}
+
+.service-label:hover {
+    border-color: var(--secondary);
+    background: rgba(212, 165, 116, 0.05);
+}
+
+.service-radio:checked + .service-label {
+    border-color: var(--secondary);
+    background: rgba(212, 165, 116, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.service-content {
+    flex: 1;
+}
+
+.service-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-desc {
+    color: var(--gray-600);
+    margin-bottom: 0.5rem;
+}
+
+.service-duration {
+    background: var(--secondary);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.form-footer {
+    padding: 2.5rem;
+    background: var(--gray-50);
+    text-align: center;
+}
+
+.process-section {
+    background: var(--white);
+}
+
+.process-timeline {
+    margin-top: 2rem;
+}
+
+.process-step {
+    text-align: center;
+    height: 100%;
+}
+
+.step-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--secondary), #e6b885);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.step-num {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.step-title {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.step-desc {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 반응형 */
+@media (max-width: 991.98px) {
+    .service-label {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .process-step {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .form-header,
+    .form-step,
+    .form-footer {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1.6rem;
+    }
+    
+    .benefit-item {
+        font-size: 0.9rem;
+    }
+    
+    .service-selection {
+        gap: 0.75rem;
+    }
+    
+    .service-label {
+        padding: 1rem;
+    }
+}
+</style>
+
+<script>
+// 폼 제출 처리
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.consulting-form');
+    const submitBtn = form.querySelector('.btn-submit');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const loadingSpinner = submitBtn.querySelector('.loading-spinner');
+
+    form.addEventListener('submit', function() {
+        submitBtn.disabled = true;
+        btnText.classList.add('d-none');
+        loadingSpinner.classList.remove('d-none');
+    });
+
+    // 전화번호 자동 포맷팅
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/[^0-9]/g, '');
+        if (value.length >= 3) {
+            value = value.substring(0, 3) + '-' + value.substring(3);
+        }
+        if (value.length >= 8) {
+            value = value.substring(0, 8) + '-' + value.substring(8, 12);
+        }
+        e.target.value = value;
+    });
+
+    // 글자 수 카운터
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        const maxLength = textarea.getAttribute('maxlength');
+        if (maxLength) {
+            const counter = document.createElement('small');
+            counter.className = 'text-muted float-end mt-1';
+            counter.textContent = `0/${maxLength}`;
+            
+            textarea.addEventListener('input', function() {
+                counter.textContent = `${this.value.length}/${maxLength}`;
+            });
+            
+            textarea.parentNode.appendChild(counter);
+        }
+    });
+});
+</script>
