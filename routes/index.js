@@ -265,6 +265,7 @@ router.get('/success-cases', (req, res) => {
 
 // routes/index.js에 추가할 지식 구독 플랫폼 라우트
 
+//======================= 서비스 ============================ //
 // 지식 구독 플랫폼 서비스 상세 페이지
 router.get('/services/knowledge-platform', (req, res) => {
   res.render('pages/services/knowledge-platform', {
@@ -311,11 +312,9 @@ router.get('/services/knowledge-platform', (req, res) => {
   });
 });
 
-// routes/index.js 파일에 추가할 코드
-
 // 조직 다움 워크숍 서비스 상세 페이지
 router.get('/services/organization-workshop', (req, res) => {
-  res.render('pages/organization-workshop', {
+  res.render('pages/services/organization-workshop', {
     title: '조직 다움 워크숍 - 조직의 고유한 색깔을 함께 만들어가는 워크숍 | 다움연구소',
     description: '구성원들이 함께 참여하여 조직만의 정체성과 문화를 발견하고 구축하는 6주간의 체계적인 워크숍 프로그램입니다. 팀워크 향상과 조직 문화 혁신을 동시에 달성하세요.',
     keywords: '조직 워크숍, 팀빌딩, 조직 문화, 정체성, 다움연구소, 기업 교육, 팀워크',
@@ -327,6 +326,18 @@ router.get('/services/organization-workshop', (req, res) => {
       { title: '핵심 사업', url: '/services' },
       { title: '조직 다움 워크숍', url: '/services/organization-workshop' }
     ]
+  });
+});
+
+// personal-consulting 개인 다움 컨설팅
+router.get('/services/personal-consulting', (req, res) => {
+  res.render('pages/services/personal-consulting', {
+    title: '개인 다움 컨설팅 - 다움연구소',
+    description: '1:1 맞춤형 컨설팅을 통해 당신의 고유한 강점과 정체성을 발견하고, 진정한 성장과 성공을 위한 개인 브랜드를 구축하세요.',
+    keywords: '개인컨설팅, 정체성발견, 퍼스널브랜딩, 1대1컨설팅, 강점분석, 커리어코칭, 자기계발',
+    canonical: res.locals.siteUrl + '/services/personal-consulting',
+    additionalCSS: ['/css/personal-consulting.css'],
+    additionalJS: ['/js/personal-consulting.js']
   });
 });
 

@@ -1,0 +1,687 @@
+/* ==================== 개인 다움 컨설팅 서비스 페이지 전용 스타일 ==================== */
+
+/* 서비스 헤더 */
+.service-header {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.service-highlights {
+  margin: 2rem 0;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.highlight-item i {
+  color: var(--secondary);
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.header-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-header-visual {
+  position: relative;
+}
+
+.floating-badge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--secondary);
+  color: var(--white);
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-lg);
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 서비스 개요 */
+.service-overview {
+  background: var(--gray-50);
+}
+
+.overview-title {
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.overview-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: 3rem;
+}
+
+.pain-points {
+  margin-top: 3rem;
+}
+
+.pain-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius-xl);
+  text-align: center;
+  height: 100%;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+.pain-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.pain-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.pain-title {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.pain-desc {
+  color: var(--gray-600);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* 컨설팅 프로세스 */
+.consulting-process {
+  background: var(--white);
+}
+
+.process-steps {
+  margin-top: 3rem;
+}
+
+.step-card {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-xl);
+  height: 100%;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--gray-100);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, var(--secondary), #e6b885);
+  transition: var(--transition-base);
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.step-card:hover::before {
+  left: 0;
+}
+
+.step-number {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--secondary), #e6b885);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.step-title {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.step-description {
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.step-details {
+  list-style: none;
+  padding: 0;
+}
+
+.step-details li {
+  padding: 0.5rem 0;
+  color: var(--gray-600);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.step-details li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--secondary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* 컨설팅 패키지 */
+.consulting-packages {
+  background: var(--gray-50);
+}
+
+.packages-grid {
+  margin-top: 3rem;
+}
+
+.package-card {
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--border-radius-xl);
+  padding: 2.5rem;
+  text-align: center;
+  height: 100%;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.package-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--secondary);
+}
+
+.package-card.featured {
+  border-color: var(--secondary);
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.05), rgba(212, 165, 116, 0.02));
+  transform: scale(1.05);
+}
+
+.package-card.featured:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.package-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--secondary), #e6b885);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--border-radius-lg);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+
+.package-header {
+  margin-bottom: 2rem;
+}
+
+.package-title {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.package-price {
+  margin-bottom: 1rem;
+}
+
+.package-price .currency {
+  font-size: 1.2rem;
+  color: var(--gray-500);
+  vertical-align: top;
+}
+
+.package-price .amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.package-description {
+  color: var(--gray-600);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.package-features {
+  margin-bottom: 2rem;
+}
+
+.package-features ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.package-features li {
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.package-features li:last-child {
+  border-bottom: none;
+}
+
+.package-features li i {
+  color: var(--success);
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.package-duration {
+  background: var(--gray-50);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.duration-text {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.package-cta {
+  margin-top: auto;
+}
+
+.btn-package {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--border-radius-lg);
+  background: var(--white);
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-base);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-package:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-package.featured {
+  background: linear-gradient(135deg, var(--secondary), #e6b885);
+  color: var(--white);
+  border-color: var(--secondary);
+}
+
+.btn-package.featured:hover {
+  background: linear-gradient(135deg, #e6b885, var(--secondary));
+  border-color: #e6b885;
+}
+
+/* 고객 후기 */
+.client-testimonials {
+  background: var(--white);
+}
+
+.testimonials-slider {
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--gray-50);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  transition: var(--transition-base);
+  border: 1px solid var(--gray-200);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+  background: var(--white);
+}
+
+.testimonial-content {
+  margin-bottom: 2rem;
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  font-style: italic;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.testimonial-text::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--secondary);
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-family: serif;
+  opacity: 0.7;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--secondary);
+  flex-shrink: 0;
+}
+
+.author-info {
+  flex: 1;
+}
+
+.author-name {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.author-detail {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.author-package {
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* 상담 신청 */
+.consultation-cta {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+  position: relative;
+}
+
+.consultation-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.consultation-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.consultation-title {
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.consultation-description {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+.consultation-form {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  margin-bottom: 2rem;
+}
+
+.consultation-form .form-control,
+.consultation-form .form-select {
+  border: 2px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  transition: var(--transition-base);
+  font-size: 1rem;
+}
+
+.consultation-form .form-control:focus,
+.consultation-form .form-select:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+}
+
+.consultation-note {
+  color: var(--white);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.consultation-note i {
+  color: var(--secondary);
+  font-size: 1.1rem;
+}
+
+/* 로딩 상태 */
+.form-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.btn-loading {
+  position: relative;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 성공 메시지 */
+.form-success {
+  background: var(--success);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.form-error {
+  background: var(--danger);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 991.98px) {
+  .floating-badge {
+    position: static;
+    display: inline-block;
+    margin-top: 2rem;
+  }
+  
+  .package-card.featured {
+    transform: none;
+  }
+  
+  .package-card.featured:hover {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .header-cta {
+    flex-direction: column;
+  }
+  
+  .header-cta .btn-daum {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .floating-badge {
+    text-align: center;
+    margin: 2rem auto 0;
+  }
+  
+  .pain-card {
+    padding: 1.5rem;
+  }
+  
+  .step-card {
+    padding: 2rem;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+  
+  .package-card {
+    padding: 2rem;
+  }
+  
+  .package-price .amount {
+    font-size: 1.8rem;
+  }
+  
+  .testimonial-card {
+    padding: 2rem;
+  }
+  
+  .testimonial-author {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .consultation-form {
+    padding: 2rem;
+  }
+  
+  .consultation-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .overview-title {
+    font-size: 1.8rem;
+  }
+  
+  .consultation-title {
+    font-size: 1.6rem;
+  }
+  
+  .package-price .amount {
+    font-size: 1.6rem;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  
+  .testimonial-text::before {
+    font-size: 3rem;
+    top: -5px;
+    left: -5px;
+  }
+}
+
+/* 애니메이션 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

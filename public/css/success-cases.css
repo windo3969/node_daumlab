@@ -1,0 +1,679 @@
+/* ==================== 성공 사례 페이지 전용 스타일 ==================== */
+
+/* 성공 사례 목록 페이지 */
+.cases-header {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+}
+
+.cases-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cases-stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.cases-stats .stat-item {
+  text-align: center;
+}
+
+.cases-stats .stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.cases-stats .stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* 필터 섹션 */
+.cases-filter {
+  background: var(--gray-50);
+  padding: 3rem 0;
+}
+
+.filter-wrapper {
+  text-align: center;
+}
+
+.filter-title {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-600);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: 0.9rem;
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* 사례 목록 */
+.cases-list {
+  background: var(--white);
+}
+
+.case-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: var(--transition-base);
+}
+
+.case-item.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.case-card {
+  background: var(--white);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gray-200);
+}
+
+.case-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--secondary);
+}
+
+.case-img-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.case-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.case-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 54, 93, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-base);
+}
+
+.case-card:hover .case-overlay {
+  opacity: 1;
+}
+
+.case-card:hover .case-img {
+  transform: scale(1.1);
+}
+
+.case-read-more {
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--white);
+  border-radius: var(--border-radius);
+  background: transparent;
+  transition: var(--transition-base);
+}
+
+.case-overlay:hover .case-read-more {
+  background: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.case-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.case-tags {
+  margin-bottom: 1rem;
+}
+
+.case-tag {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.case-tag.secondary {
+  background: var(--secondary);
+}
+
+.case-title {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  flex-grow: 1;
+}
+
+.case-summary {
+  color: var(--gray-600);
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.case-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.result-item {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* CTA 섹션 */
+.cases-cta {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+}
+
+.cases-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ==================== 개별 사례 상세 페이지 ==================== */
+
+/* 상세 페이지 헤더 */
+.case-detail-header {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+}
+
+.case-breadcrumb {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.case-breadcrumb a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.case-meta {
+  margin-bottom: 1.5rem;
+}
+
+.case-author {
+  margin-top: 1.5rem;
+}
+
+.author-name {
+  font-size: 1.1rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* 변화 요약 섹션 */
+.case-summary {
+  background: var(--gray-50);
+}
+
+.summary-card {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.summary-title {
+  color: var(--primary);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.before-after-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.section-title {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.change-list {
+  list-style: none;
+  padding: 0;
+}
+
+.change-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition-base);
+}
+
+.change-item.before {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.change-item.after {
+  background: rgba(40, 167, 69, 0.1);
+}
+
+.change-item i {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.change-item.before i {
+  color: var(--danger);
+}
+
+.change-item.after i {
+  color: var(--success);
+}
+
+/* 스토리 섹션 */
+.case-story {
+  background: var(--white);
+}
+
+.story-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story-title {
+  color: var(--primary);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.story-chapter {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--gray-50);
+  border-radius: var(--border-radius-xl);
+  border-left: 4px solid var(--secondary);
+}
+
+.chapter-title {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-content p {
+  color: var(--gray-700);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* 고객 증언 섹션 */
+.customer-testimonial {
+  background: var(--gray-50);
+}
+
+.testimonial-box {
+  text-align: center;
+}
+
+.testimonial-quote {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--primary);
+  font-style: italic;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.quote-text::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--secondary);
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  font-family: serif;
+}
+
+.quote-author {
+  font-size: 1.1rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* 관련 서비스 섹션 */
+.related-services {
+  background: var(--white);
+}
+
+.service-recommendation {
+  text-align: center;
+}
+
+.service-card {
+  background: var(--gray-50);
+  padding: 3rem;
+  border-radius: var(--border-radius-xl);
+  border: 2px solid var(--gray-200);
+  transition: var(--transition-base);
+}
+
+.service-card:hover {
+  border-color: var(--secondary);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.service-title {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-description {
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.service-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  background: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  color: var(--primary);
+  border: 1px solid var(--gray-200);
+}
+
+.btn-service {
+  background: linear-gradient(135deg, var(--secondary), #e6b885);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-base);
+  display: inline-block;
+}
+
+.btn-service:hover {
+  background: linear-gradient(135deg, #e6b885, var(--secondary));
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+/* 다른 사례 섹션 */
+.other-cases {
+  background: var(--gray-50);
+}
+
+.mini-case-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  border: 1px solid var(--gray-200);
+}
+
+.mini-case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.mini-case-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.mini-case-content {
+  padding: 1.5rem;
+}
+
+.mini-case-title {
+  color: var(--primary);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.mini-case-author {
+  color: var(--gray-500);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.mini-case-link {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition-base);
+}
+
+.mini-case-link:hover {
+  color: var(--primary);
+}
+
+/* 상세 페이지 CTA */
+.case-detail-cta {
+  background: linear-gradient(135deg, var(--primary), #2d4a6b);
+  color: var(--white);
+  position: relative;
+}
+
+.case-detail-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 반응형 디자인 */
+@media (max-width: 991.98px) {
+  .cases-stats {
+    gap: 2rem;
+  }
+  
+  .filter-tabs {
+    gap: 0.5rem;
+  }
+  
+  .filter-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .before-after-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .summary-card {
+    padding: 2rem;
+  }
+  
+  .story-chapter {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-quote {
+    padding: 2rem;
+  }
+  
+  .service-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cases-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .filter-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .case-img-container {
+    height: 180px;
+  }
+  
+  .case-content {
+    padding: 1.25rem;
+  }
+  
+  .summary-title {
+    font-size: 1.5rem;
+  }
+  
+  .story-title {
+    font-size: 1.6rem;
+  }
+  
+  .chapter-title {
+    font-size: 1.1rem;
+  }
+  
+  .quote-text {
+    font-size: 1.2rem;
+  }
+  
+  .service-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mini-case-img {
+    height: 120px;
+  }
+  
+  .mini-case-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .case-title {
+    font-size: 1.1rem;
+  }
+  
+  .summary-card {
+    padding: 1.5rem;
+  }
+  
+  .story-chapter {
+    padding: 1rem;
+  }
+  
+  .testimonial-quote {
+    padding: 1.5rem;
+  }
+  
+  .quote-text {
+    font-size: 1.1rem;
+  }
+  
+  .service-card {
+    padding: 1.5rem;
+  }
+}
