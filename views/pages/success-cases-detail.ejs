@@ -7,23 +7,23 @@
       <div class="col-lg-6">
         <div class="page-header-content">
           <div class="case-breadcrumb">
-            <a href="/success-cases">성공 사례</a> > <span><%= case.service %></span>
+            <a href="/success-cases">성공 사례</a> > <span><%= cases.service %></span>
           </div>
           <div class="case-meta">
-            <span class="case-tag"><%= case.service %></span>
-            <span class="case-tag secondary"><%= case.age %>세 <%= case.occupation %></span>
+            <span class="case-tag"><%= cases.service %></span>
+            <span class="case-tag secondary"><%= cases.age %>세 <%= cases.occupation %></span>
           </div>
-          <h1 class="page-title"><%= case.title %></h1>
-          <p class="page-description"><%= case.summary %></p>
+          <h1 class="page-title"><%= cases.title %></h1>
+          <p class="page-description"><%= cases.summary %></p>
           <div class="case-author">
-            <span class="author-name"><%= case.name %>님의 이야기</span>
+            <span class="author-name"><%= cases.name %>님의 이야기</span>
           </div>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="page-header-visual">
-          <img src="<%= case.image %>" 
-               alt="<%= case.name %>님의 사례 이미지" 
+          <img src="<%= cases.image %>" 
+               alt="<%= cases.name %>님의 사례 이미지" 
                class="img-fluid rounded-3">
         </div>
       </div>
@@ -42,7 +42,7 @@
             <div class="before-section">
               <h3 class="section-title">변화 전 (Before)</h3>
               <ul class="change-list">
-                <% case.beforeAfter.before.forEach(item => { %>
+                <% cases.beforeAfter.before.forEach(item => { %>
                   <li class="change-item before">
                     <i class="bi bi-x-circle" aria-hidden="true"></i>
                     <span><%= item %></span>
@@ -53,7 +53,7 @@
             <div class="after-section">
               <h3 class="section-title">변화 후 (After)</h3>
               <ul class="change-list">
-                <% case.beforeAfter.after.forEach(item => { %>
+                <% cases.beforeAfter.after.forEach(item => { %>
                   <li class="change-item after">
                     <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                     <span><%= item %></span>
@@ -79,7 +79,7 @@
           <div class="story-chapter">
             <h3 class="chapter-title">🤔 시작: 어떤 고민이 있었나요?</h3>
             <div class="chapter-content">
-              <% if (case.id === 'kim-jiwon') { %>
+              <% if (cases.id === 'kim-jiwon') { %>
                 <p>
                   대학을 졸업하고 바로 마케팅 회사에 취업했지만, 매일이 고통스러웠습니다. 
                   다른 사람들은 모두 열정적으로 일하는 것 같은데, 저만 뒤처지는 느낌이었어요.
@@ -88,7 +88,7 @@
                   "내가 정말 이 일에 맞는 사람일까?" "다른 사람들은 어떻게 이렇게 확신을 가지고 살까?" 
                   이런 생각들이 머릿속을 맴돌았습니다.
                 </p>
-              <% } else if (case.id === 'park-hyunwoo') { %>
+              <% } else if (cases.id === 'park-hyunwoo') { %>
                 <p>
                   20대 후반부터 30대 초반까지 정말 많은 일들을 해봤어요. 
                   카페 창업, 온라인 쇼핑몰, 교육 컨설팅... 하지만 어느 것 하나 제대로 되는 게 없었습니다.
@@ -104,7 +104,7 @@
           <div class="story-chapter">
             <h3 class="chapter-title">💡 전환점: 다움연구소를 만나다</h3>
             <div class="chapter-content">
-              <% if (case.id === 'kim-jiwon') { %>
+              <% if (cases.id === 'kim-jiwon') { %>
                 <p>
                   친구의 추천으로 다움연구소의 개인 컨설팅을 받게 되었습니다. 
                   처음에는 반신반의했지만, 첫 상담에서 제가 느끼던 불안감의 원인을 정확히 짚어주시더라고요.
@@ -113,7 +113,7 @@
                   6주간의 컨설팅 과정에서 제가 추구하는 가치, 타고난 강점, 그리고 저에게 맞는 일의 방식을 
                   체계적으로 발견할 수 있었습니다.
                 </p>
-              <% } else if (case.id === 'park-hyunwoo') { %>
+              <% } else if (cases.id === 'park-hyunwoo') { %>
                 <p>
                   우연히 다움연구소의 뉴스레터를 구독하게 되었어요. 
                   처음에는 "또 다른 자기계발서냐"라고 생각했는데, 내용이 달랐습니다.
@@ -129,7 +129,7 @@
           <div class="story-chapter">
             <h3 class="chapter-title">🚀 변화: 어떤 변화가 있었나요?</h3>
             <div class="chapter-content">
-              <% if (case.id === 'kim-jiwon') { %>
+              <% if (cases.id === 'kim-jiwon') { %>
                 <p>
                   가장 큰 변화는 자신감이었어요. 제가 어떤 사람인지, 무엇을 잘하는지 명확해지니까 
                   일하는 방식도 달라졌습니다. 같은 업무라도 제 방식으로 접근하니까 훨씬 효과적이었어요.
@@ -138,7 +138,7 @@
                   결국 1년 후에는 제가 정말 하고 싶었던 브랜드 전략 분야로 이직했고, 
                   지금은 매일 아침이 기다려질 정도로 만족스럽게 일하고 있습니다.
                 </p>
-              <% } else if (case.id === 'park-hyunwoo') { %>
+              <% } else if (cases.id === 'park-hyunwoo') { %>
                 <p>
                   6개월의 구독 과정을 통해 제가 '연결자(Connector)' 유형이라는 걸 발견했어요. 
                   서로 다른 분야의 지식과 사람들을 연결하는 것이 제 강점이었던 거죠.
@@ -164,9 +164,9 @@
         <div class="testimonial-box">
           <div class="testimonial-quote">
             <blockquote class="quote-text">
-              "<%= case.testimonial %>"
+              "<%= cases.testimonial %>"
             </blockquote>
-            <cite class="quote-author">- <%= case.name %>님 -</cite>
+            <cite class="quote-author">- <%= cases.name %>님 -</cite>
           </div>
         </div>
       </div>
@@ -178,7 +178,7 @@
 <section class="section-padding related-services" aria-label="관련 서비스">
   <div class="container">
     <div class="section-title-wrapper">
-      <h2 class="section-title"><%= case.name %>님이 이용한 서비스</h2>
+      <h2 class="section-title"><%= cases.name %>님이 이용한 서비스</h2>
       <p class="section-description">
         비슷한 고민을 가지고 계신가요? 같은 서비스로 변화를 시작해보세요.
       </p>
@@ -187,7 +187,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="service-recommendation">
-          <% if (case.service === '개인 다움 컨설팅') { %>
+          <% if (cases.service === '개인 다움 컨설팅') { %>
             <div class="service-card">
               <div class="service-icon">🎯</div>
               <h3 class="service-title">개인 다움 컨설팅</h3>
@@ -202,7 +202,7 @@
               </div>
               <a href="/services/personal-consulting" class="btn-service">서비스 자세히 보기</a>
             </div>
-          <% } else if (case.service === '지식 구독 플랫폼') { %>
+          <% } else if (cases.service === '지식 구독 플랫폼') { %>
             <div class="service-card">
               <div class="service-icon">📨</div>
               <h3 class="service-title">지식 구독 플랫폼</h3>
@@ -275,9 +275,9 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8 text-center">
-        <h2 class="cta-title">당신도 <%= case.name %>님처럼 변화할 수 있습니다</h2>
+        <h2 class="cta-title">당신도 <%= cases.name %>님처럼 변화할 수 있습니다</h2>
         <p class="cta-description">
-          <%= case.name %>님이 경험한 것과 같은 변화를<br>
+          <%= cases.name %>님이 경험한 것과 같은 변화를<br>
           당신도 시작해보세요.
         </p>
         <div class="cta-buttons">

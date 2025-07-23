@@ -4,7 +4,7 @@ const router = express.Router();
 // 더 간단한 방법으로 홈페이지 렌더링
 router.get('/', (req, res) => {
   // EJS 파일을 직접 렌더링 (layout.ejs에서 <%- body %> 부분에 home.ejs가 들어감)
-  res.render('pages/home', {
+  res.render('pages/home', { 
     title: '다움연구소 - 개인과 조직의 다움을 발견하고 세우는 곳',
     description: '다움연구소는 개인과 조직이 나다움, 우리다움, 회사다움이라는 고유한 정체성을 발견하고 정립할 수 있도록 돕습니다.',
     keywords: '다움연구소, 정체성, 컨설팅, 퍼스널브랜딩, 조직문화',
@@ -48,7 +48,9 @@ router.get('/services', (req, res) => {
     title: '핵심 사업 - 다움연구소',
     description: '개인 다움 컨설팅, 조직 다움 워크숍, 지식 구독 플랫폼, 콘텐츠 개발 등 다움연구소의 핵심 사업을 소개합니다.',
     keywords: '다움연구소, 서비스, 컨설팅, 워크숍, 뉴스레터',
-    canonical: res.locals.siteUrl + '/services'
+    canonical: res.locals.siteUrl + '/services',
+    additionalCSS: ['/css/services.css'],
+    additionalJS: ['/js/services.js']
   });
 });
 
@@ -59,26 +61,6 @@ router.get('/success-cases', (req, res) => {
     description: '다움연구소의 프로그램을 통해 자신만의 정체성을 발견하고 성장한 사람들의 실제 사례를 소개합니다.',
     keywords: '다움연구소, 성공사례, 후기, 변화, 성장',
     canonical: res.locals.siteUrl + '/success-cases'
-  });
-});
-
-// 요금제
-router.get('/pricing', (req, res) => {
-  res.render('pages/pricing', {
-    title: '요금제 - 다움연구소',
-    description: '체험판, 프리미엄, 엔터프라이즈 등 다양한 요금제를 통해 개인과 조직의 상황에 맞는 서비스를 제공합니다.',
-    keywords: '다움연구소, 요금제, 가격, 구독, 서비스',
-    canonical: res.locals.siteUrl + '/pricing'
-  });
-});
-
-// 컨설팅 신청
-router.get('/consulting-apply', (req, res) => {
-  res.render('pages/consulting-apply', {
-    title: '컨설팅 신청 - 다움연구소',
-    description: '개인 또는 조직의 다움을 발견하는 컨설팅 서비스를 신청하세요.',
-    keywords: '다움연구소, 컨설팅신청, 상담, 서비스신청',
-    canonical: res.locals.siteUrl + '/consulting-apply'
   });
 });
 
@@ -240,12 +222,12 @@ router.get('/success-cases/:caseId', (req, res) => {
     });
   }
 
-  res.render('pages/success-case-detail', {
+  res.render('pages/success-cases-detail', {
     title: `${caseData.title} - ${caseData.name}님의 성공 사례 | 다움연구소`,
     description: caseData.summary,
     keywords: `성공사례, ${caseData.service}, ${caseData.occupation}, 변화, 성장, 다움연구소`,
     canonical: res.locals.siteUrl + `/success-cases/${caseId}`,
-    case: caseData,
+    cases: caseData,
     additionalCSS: ['/css/success-cases.css'],
     additionalJS: ['/js/success-cases.js']
   });
@@ -321,7 +303,7 @@ router.get('/services/organization-workshop', (req, res) => {
     canonical: res.locals.siteUrl + '/services/organization-workshop',
     additionalCSS: ['/css/organization-workshop.css'],
     additionalJS: ['/js/organization-workshop.js'],
-    breadcrumb: [
+    readcrumb: [
       { title: '홈', url: '/' },
       { title: '핵심 사업', url: '/services' },
       { title: '조직 다움 워크숍', url: '/services/organization-workshop' }
@@ -349,7 +331,7 @@ router.get('/services', (req, res) => {
     keywords: '다움연구소, 서비스, 컨설팅, 워크숍, 구독, 콘텐츠 개발',
     canonical: res.locals.siteUrl + '/services',
     additionalCSS: ['/css/services.css'],
-    additionalJS: ['/js/services.js'],
+    additionalJS: ['/js/services.js'], 
     // 페이지별 메타데이터
     pageType: 'services',
     breadcrumb: [
@@ -405,5 +387,81 @@ router.get('/services', (req, res) => {
   });
 });
 
+// 콘텐츠 개발 및 배포 서비스 상세 페이지
+router.get('/services/content-development', (req, res) => {
+  res.render('pages/services/content-development', {
+    title: '콘텐츠 개발 및 배포 - 정체성 기반 맞춤형 콘텐츠 제작 | 다움연구소',
+    description: '개인과 조직의 고유한 정체성을 바탕으로 한 전문 콘텐츠를 개발하고 배포합니다. 교육자료, 브랜딩 콘텐츠, 커뮤니케이션 자료까지 체계적이고 일관성 있는 메시지를 전달하세요.',
+    keywords: '콘텐츠개발, 브랜딩콘텐츠, 교육자료, 커뮤니케이션자료, 맞춤형콘텐츠, 정체성기반콘텐츠, 다움연구소',
+    canonical: res.locals.siteUrl + '/services/content-development',
+    additionalCSS: ['/css/content-development.css'],
+    additionalJS: ['/js/content-development.js'],
+    breadcrumb: [
+      { title: '홈', url: '/' },
+      { title: '핵심 사업', url: '/services' },
+      { title: '콘텐츠 개발 및 배포', url: '/services/content-development' }
+    ],
+    // 구조화된 데이터 (SEO)
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "콘텐츠 개발 및 배포",
+      "provider": {
+        "@type": "Organization",
+        "name": "다움연구소",
+        "url": res.locals.siteUrl,
+        "logo": res.locals.siteUrl + "/images/logo/daum-logo.png"
+      },
+      "description": "정체성 기반 맞춤형 콘텐츠 개발 및 배포 서비스",
+      "serviceType": "콘텐츠 개발",
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "기본 패키지",
+          "price": "3000000",
+          "priceCurrency": "KRW",
+          "description": "핵심 콘텐츠 10개 제작, 기본 디자인 적용"
+        },
+        {
+          "@type": "Offer",
+          "name": "프리미엄 패키지",
+          "price": "8000000",
+          "priceCurrency": "KRW",
+          "description": "맞춤형 콘텐츠 30개 제작, 전문 디자인 및 브랜딩"
+        },
+        {
+          "@type": "Offer",
+          "name": "맞춤 견적",
+          "price": "0",
+          "priceCurrency": "KRW",
+          "description": "프로젝트별 맞춤 기획 및 견적"
+        }
+      ],
+      "additionalType": [
+        "브랜드 콘텐츠 개발",
+        "교육 콘텐츠 제작",
+        "커뮤니케이션 자료 개발"
+      ]
+    }
+  });
+});
+
+// 컨설팅 신청
+router.get('/consulting-apply', (req, res) => {
+  res.render('pages/consulting-apply', {
+    title: '컨설팅 신청 - 다움연구소',
+    description: '개인 또는 조직의 다움을 발견하는 컨설팅 서비스를 신청하세요.',
+    keywords: '다움연구소, 컨설팅신청, 상담, 서비스신청',
+    canonical: res.locals.siteUrl + '/consulting-apply',
+    additionalCSS: ['/css/consulting-apply.css'],
+    additionalJS: ['/js/consulting-apply.js'],
+    formData: {},
+    errors: []
+  });
+});
 
 module.exports = router;

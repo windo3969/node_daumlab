@@ -1578,6 +1578,50 @@ a:hover {
   display: flex;
 }
 
+/* ==================== 핵심 가치 섹션1 ==================== */
+.core-values,
+.core-values-preview {
+  background: var(--gray-50);
+}
+
+.value-card {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-xl);
+  text-align: center;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  border: 1px solid var(--gray-200);
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.value-header {
+  margin-bottom: 1.5rem;
+}
+
+.value-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.value-title {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.value-description {
+  color: var(--gray-600);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
 
 /* ==================== 사업 섹션 ==================== */
 .business-model,

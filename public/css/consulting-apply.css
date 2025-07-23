@@ -1,0 +1,251 @@
+
+/* 컨설팅 신청 페이지 전용 스타일 */
+.consulting-header {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    color: var(--white);
+}
+
+.consulting-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.benefit-item i {
+    font-size: 1.2rem;
+}
+
+.consulting-form-section {
+    background: var(--gray-50);
+}
+
+.consulting-form {
+    background: var(--white);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.form-header {
+    background: linear-gradient(135deg, var(--primary), #2d4a6b);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.form-title {
+    color: var(--white);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.form-step {
+    padding: 2.5rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.form-step:last-of-type {
+    border-bottom: none;
+}
+
+.step-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--secondary), #e6b885);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.service-selection {
+    display: grid;
+    gap: 1rem;
+}
+
+.service-option {
+    position: relative;
+}
+
+.service-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.service-label {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-base);
+    background: var(--white);
+}
+
+.service-label:hover {
+    border-color: var(--secondary);
+    background: rgba(212, 165, 116, 0.05);
+}
+
+.service-radio:checked + .service-label {
+    border-color: var(--secondary);
+    background: rgba(212, 165, 116, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.service-content {
+    flex: 1;
+}
+
+.service-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-desc {
+    color: var(--gray-600);
+    margin-bottom: 0.5rem;
+}
+
+.service-duration {
+    background: var(--secondary);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.form-footer {
+    padding: 2.5rem;
+    background: var(--gray-50);
+    text-align: center;
+}
+
+.process-section {
+    background: var(--white);
+}
+
+.process-timeline {
+    margin-top: 2rem;
+}
+
+.process-step {
+    text-align: center;
+    height: 100%;
+}
+
+.step-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--secondary), #e6b885);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.step-num {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.step-title {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.step-desc {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 반응형 */
+@media (max-width: 991.98px) {
+    .service-label {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .process-step {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .form-header,
+    .form-step,
+    .form-footer {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1.6rem;
+    }
+    
+    .benefit-item {
+        font-size: 0.9rem;
+    }
+    
+    .service-selection {
+        gap: 0.75rem;
+    }
+    
+    .service-label {
+        padding: 1rem;
+    }
+}
