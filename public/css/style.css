@@ -802,8 +802,8 @@ a:hover {
 
 .btn-daum:not(.primary) {
   background: transparent;
-  color: var(--white);
-  border-color: var(--white);
+  color: #e6b885;
+  border-color: var(--gray-300);
 }
 
 .btn-daum:not(.primary):hover {
