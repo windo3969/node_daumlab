@@ -19,8 +19,8 @@ router.get('/about', (req, res) => {
     description: '다움연구소의 핵심 가치와 철학, 그리고 우리가 추구하는 비전에 대해 소개합니다.',
     keywords: '다움연구소, 소개, 핵심가치, 철학, 비전',
     canonical: res.locals.siteUrl + '/about',
-    additionalCSS: ['css/about.css'],
-    additionalJS: ['js/about.js']
+    additionalCSS: ['/css/about.css'],
+    additionalJS: ['/js/about.js']
   });
 });
 
