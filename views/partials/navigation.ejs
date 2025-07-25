@@ -2,7 +2,8 @@
   <div class="container">
     <!-- 로고 -->
     <a class="navbar-brand" href="/" aria-label="다움연구소 홈페이지로 이동">
-      <span style="color: var(--primary);" aria-hidden="true">다움</span><span style="color: var(--secondary);" aria-hidden="true">연구소</span>
+      <span style="color: var(--primary);" aria-hidden="true">다움</span><span style="color: var(--secondary);"
+        aria-hidden="true">연구소</span>
     </a>
 
     <!-- 모바일 메뉴 토글 버튼 -->
@@ -15,93 +16,59 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto" role="menubar">
         <li class="nav-item" role="none">
-          <a class="nav-link <%= currentPath === '/about' ? 'active' : '' %>" 
-             href="/about" 
-             role="menuitem"
-             <%= currentPath === '/about' ? 'aria-current="page"' : '' %>>
+          <a class="nav-link <%= currentPath === '/about' ? 'active' : '' %>" href="/about" role="menuitem"
+            <%=currentPath==='/about' ? 'aria-current="page"' : '' %>>
             연구소 소개
           </a>
         </li>
-        
-        <li class="nav-item dropdown" role="none">
-          <a class="nav-link dropdown-toggle <%= currentPath.startsWith('/values') || currentPath.startsWith('/vision') ? 'active' : '' %>" 
-             href="#" 
-             role="menuitem"
-             id="aboutDropdown" 
-             data-bs-toggle="dropdown" 
-             aria-expanded="false"
-             aria-haspopup="true">
-            회사 소개
+
+        <li class="nav-item" role="none">
+          <a class="nav-link <%= currentPath === '/seminars' ? 'active' : '' %>" href="/seminars" role="menuitem"
+            <%=currentPath==='/seminars' ? 'aria-current="page"' : '' %>>
+            VIP 세미나
           </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown" role="menu">
-            <li role="none">
-              <a class="dropdown-item <%= currentPath === '/values' ? 'active' : '' %>" 
-                 href="/values" 
-                 role="menuitem"
-                 <%= currentPath === '/values' ? 'aria-current="page"' : '' %>>
-                핵심 가치
-              </a>
-            </li>
-            <li role="none">
-              <a class="dropdown-item <%= currentPath === '/vision' ? 'active' : '' %>" 
-                 href="/vision" 
-                 role="menuitem"
-                 <%= currentPath === '/vision' ? 'aria-current="page"' : '' %>>
-                비전
-              </a>
-            </li>
-          </ul>
         </li>
 
         <li class="nav-item dropdown" role="none">
-          <a class="nav-link dropdown-toggle <%= currentPath.startsWith('/services') ? 'active' : '' %>" 
-             href="#" 
-             role="menuitem"
-             id="servicesDropdown" 
-             data-bs-toggle="dropdown" 
-             aria-expanded="false"
-             aria-haspopup="true">
+          <a class="nav-link dropdown-toggle <%= currentPath.startsWith('/services') ? 'active' : '' %>" href="#"
+            role="menuitem" id="servicesDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
             서비스
           </a>
           <ul class="dropdown-menu" aria-labelledby="servicesDropdown" role="menu">
             <li role="none">
-              <a class="dropdown-item <%= currentPath === '/services' ? 'active' : '' %>" 
-                 href="/services" 
-                 role="menuitem"
-                 <%= currentPath === '/services' ? 'aria-current="page"' : '' %>>
+              <a class="dropdown-item <%= currentPath === '/services' ? 'active' : '' %>" href="/services"
+                role="menuitem" <%=currentPath==='/services' ? 'aria-current="page"' : '' %>>
                 전체 서비스
               </a>
             </li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li role="none">
-              <a class="dropdown-item <%= currentPath === '/services/personal-consulting' ? 'active' : '' %>" 
-                 href="/services/personal-consulting" 
-                 role="menuitem"
-                 <%= currentPath === '/services/personal-consulting' ? 'aria-current="page"' : '' %>>
+              <a class="dropdown-item <%= currentPath === '/services/personal-consulting' ? 'active' : '' %>"
+                href="/services/personal-consulting" role="menuitem" <%=currentPath==='/services/personal-consulting'
+                ? 'aria-current="page"' : '' %>>
                 개인 다움 컨설팅
               </a>
             </li>
             <li role="none">
-              <a class="dropdown-item <%= currentPath === '/services/knowledge-platform' ? 'active' : '' %>" 
-                 href="/services/knowledge-platform" 
-                 role="menuitem"
-                 <%= currentPath === '/services/knowledge-platform' ? 'aria-current="page"' : '' %>>
+              <a class="dropdown-item <%= currentPath === '/services/knowledge-platform' ? 'active' : '' %>"
+                href="/services/knowledge-platform" role="menuitem" <%=currentPath==='/services/knowledge-platform'
+                ? 'aria-current="page"' : '' %>>
                 지식 구독 플랫폼
               </a>
             </li>
             <li role="none">
-              <a class="dropdown-item <%= currentPath === '/services/organization-workshop' ? 'active' : '' %>" 
-                 href="/services/organization-workshop" 
-                 role="menuitem"
-                 <%= currentPath === '/services/organization-workshop' ? 'aria-current="page"' : '' %>>
+              <a class="dropdown-item <%= currentPath === '/services/organization-workshop' ? 'active' : '' %>"
+                href="/services/organization-workshop" role="menuitem"
+                <%=currentPath==='/services/organization-workshop' ? 'aria-current="page"' : '' %>>
                 조직 다움 워크숍
               </a>
             </li>
             <li role="none">
-              <a class="dropdown-item <%= currentPath === '/services/content-development' ? 'active' : '' %>" 
-                 href="/services/content-development" 
-                 role="menuitem"
-                 <%= currentPath === '/services/content-development' ? 'aria-current="page"' : '' %>>
+              <a class="dropdown-item <%= currentPath === '/services/content-development' ? 'active' : '' %>"
+                href="/services/content-development" role="menuitem" <%=currentPath==='/services/content-development'
+                ? 'aria-current="page"' : '' %>>
                 콘텐츠 개발
               </a>
             </li>
@@ -109,29 +76,22 @@
         </li>
 
         <li class="nav-item" role="none">
-          <a class="nav-link <%= currentPath === '/success-cases' ? 'active' : '' %>" 
-             href="/success-cases" 
-             role="menuitem"
-             <%= currentPath === '/success-cases' ? 'aria-current="page"' : '' %>>
+          <a class="nav-link <%= currentPath === '/success-cases' ? 'active' : '' %>" href="/success-cases"
+            role="menuitem" <%=currentPath==='/success-cases' ? 'aria-current="page"' : '' %>>
             성공 사례
           </a>
         </li>
 
         <li class="nav-item" role="none">
-          <a class="nav-link <%= currentPath === '/contact' ? 'active' : '' %>" 
-             href="/contact" 
-             role="menuitem"
-             <%= currentPath === '/contact' ? 'aria-current="page"' : '' %>>
+          <a class="nav-link <%= currentPath === '/contact' ? 'active' : '' %>" href="/contact" role="menuitem"
+            <%=currentPath==='/contact' ? 'aria-current="page"' : '' %>>
             문의하기
           </a>
         </li>
 
         <!-- CTA 버튼 -->
         <li class="nav-item ms-lg-3 mt-2 mt-lg-0" role="none">
-          <a class="btn btn-primary" 
-             href="/consulting-apply" 
-             role="button"
-             aria-label="컨설팅 신청하기">
+          <a class="btn btn-primary" href="/consulting-apply" role="button" aria-label="컨설팅 신청하기">
             컨설팅 신청
           </a>
         </li>

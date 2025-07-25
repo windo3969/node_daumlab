@@ -1,0 +1,428 @@
+<!-- 세미나 히어로 섹션 -->
+<section class="seminar-hero">
+  <div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop>
+      <source src="<%= seminar.heroVideo %>" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-8">
+          <div class="hero-text">
+            <div class="seminar-category" data-aos="fade-up">
+              <i class="fas fa-graduation-cap"></i>
+              <%= seminar.category %>
+            </div>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+              <%= seminar.title %>
+            </h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+              <%= seminar.subtitle %>
+            </p>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+              <%= seminar.description %>
+            </p>
+            
+            <div class="hero-highlights" data-aos="fade-up" data-aos-delay="400">
+              <% seminar.highlights.forEach(highlight => { %>
+                <span class="highlight-item">
+                  <i class="fas fa-check"></i>
+                  <%= highlight %>
+                </span>
+              <% }); %>
+            </div>
+            
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+              <a href="#registration" class="btn-seminar primary">
+                <i class="fas fa-calendar-plus"></i>
+                지금 신청하기
+              </a>
+              <a href="#curriculum" class="btn-seminar secondary">
+                <i class="fas fa-play"></i>
+                커리큘럼 보기
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="hero-info-card" data-aos="fade-left" data-aos-delay="300">
+            <div class="info-header">
+              <h3>세미나 정보</h3>
+            </div>
+            <div class="info-body">
+              <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <span class="label">소요시간</span>
+                  <span class="value"><%= seminar.duration %></span>
+                </div>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-users"></i>
+                <div>
+                  <span class="label">참가인원</span>
+                  <span class="value"><%= seminar.participants %></span>
+                </div>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-chart-line"></i>
+                <div>
+                  <span class="label">난이도</span>
+                  <span class="value"><%= seminar.level %></span>
+                </div>
+              </div>
+              <div class="info-item price">
+                <i class="fas fa-tag"></i>
+                <div>
+                  <span class="label">참가비</span>
+                  <div class="price-info">
+                    <span class="early-price">조기등록: <%= seminar.price.early.toLocaleString() %>원</span>
+                    <span class="regular-price">정가: <%= seminar.price.regular.toLocaleString() %>원</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">
+    <div class="scroll-text">Scroll to explore</div>
+    <div class="scroll-arrow">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+</section>
+
+<!-- 강사 소개 섹션 -->
+<section class="instructor-section section-padding">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="instructor-image">
+          <img src="<%= seminar.instructor.image %>" alt="<%= seminar.instructor.name %>" class="img-fluid rounded-3">
+          <div class="instructor-badge">
+            <i class="fas fa-award"></i>
+            <span>전문 강사</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="instructor-info">
+          <div class="section-subtitle">Meet Your Instructor</div>
+          <h2 class="section-title">강사 소개</h2>
+          
+          <div class="instructor-details">
+            <h3 class="instructor-name"><%= seminar.instructor.name %></h3>
+            <p class="instructor-title"><%= seminar.instructor.title %></p>
+            <p class="instructor-credential"><%= seminar.instructor.credential %></p>
+            
+            <div class="instructor-stats">
+              <div class="stat-item">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">년 경험</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">1000+</span>
+                <span class="stat-label">수강생</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">만족도</span>
+              </div>
+            </div>
+            
+            <p class="instructor-description">
+              <%= seminar.instructor.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 커리큘럼 섹션 -->
+<section id="curriculum" class="curriculum-section section-padding">
+  <div class="container">
+    <div class="section-title-wrapper" data-aos="fade-up">
+      <div class="section-subtitle">Curriculum</div>
+      <h2 class="section-title">체계적인 커리큘럼</h2>
+      <p class="section-description">
+        단계별로 구성된 체계적인 프로그램으로 확실한 성과를 보장합니다.
+      </p>
+    </div>
+    
+    <div class="curriculum-timeline">
+      <% seminar.curriculum.forEach((part, index) => { %>
+        <div class="curriculum-item" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+          <div class="curriculum-step">
+            <span class="step-number"><%= index + 1 %></span>
+          </div>
+          <div class="curriculum-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <div class="curriculum-image">
+                  <img src="<%= part.image %>" alt="<%= part.title %>" class="img-fluid rounded-3">
+                  <div class="duration-badge">
+                    <i class="fas fa-clock"></i>
+                    <%= part.duration %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="curriculum-content">
+                  <h3 class="curriculum-title"><%= part.title %></h3>
+                  <div class="curriculum-topics">
+                    <% part.topics.forEach(topic => { %>
+                      <span class="topic-item">
+                        <i class="fas fa-check-circle"></i>
+                        <%= topic %>
+                      </span>
+                    <% }); %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- 혜택 섹션 -->
+<section class="benefits-section section-padding">
+  <div class="container">
+    <div class="section-title-wrapper" data-aos="fade-up">
+      <div class="section-subtitle">Benefits</div>
+      <h2 class="section-title">참가 혜택</h2>
+      <p class="section-description">
+        세미나 참가를 통해 얻을 수 있는 다양한 혜택들을 확인하세요.
+      </p>
+    </div>
+    
+    <div class="row">
+      <% seminar.benefits.forEach((benefit, index) => { %>
+        <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="<%= benefit.icon %>"></i>
+            </div>
+            <div class="benefit-content">
+              <h4 class="benefit-title"><%= benefit.title %></h4>
+              <p class="benefit-description"><%= benefit.description %></p>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    
+    <div class="includes-section" data-aos="fade-up" data-aos-delay="400">
+      <h3 class="includes-title">포함 사항</h3>
+      <div class="includes-grid">
+        <% seminar.includes.forEach(item => { %>
+          <div class="include-item">
+            <i class="fas fa-gift"></i>
+            <%= item %>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 갤러리 섹션 -->
+<section class="gallery-section section-padding">
+  <div class="container">
+    <div class="section-title-wrapper" data-aos="fade-up">
+      <div class="section-subtitle">Gallery</div>
+      <h2 class="section-title">세미나 현장</h2>
+      <p class="section-description">
+        실제 세미나 현장의 모습을 통해 생생한 분위기를 느껴보세요.
+      </p>
+    </div>
+    
+    <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
+      <% seminar.gallery.forEach((image, index) => { %>
+        <div class="gallery-item" data-src="<%= image %>" data-index="<%= index %>">
+          <img src="<%= image %>" alt="세미나 현장 <%= index + 1 %>" class="img-fluid">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 섹션 -->
+<section class="testimonials-section section-padding">
+  <div class="container">
+    <div class="section-title-wrapper" data-aos="fade-up">
+      <div class="section-subtitle">Testimonials</div>
+      <h2 class="section-title">수강생 후기</h2>
+      <p class="section-description">
+        실제 참가자들의 생생한 후기를 통해 세미나의 가치를 확인하세요.
+      </p>
+    </div>
+    
+    <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <% seminar.testimonials.forEach(testimonial => { %>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">
+                    <img src="<%= testimonial.image %>" alt="<%= testimonial.name %>">
+                  </div>
+                  <div class="testimonial-info">
+                    <h4 class="testimonial-name"><%= testimonial.name %></h4>
+                    <p class="testimonial-meta"><%= testimonial.age %>세 · <%= testimonial.occupation %></p>
+                    <div class="testimonial-rating">
+                      <% for(let i = 0; i < testimonial.rating; i++) { %>
+                        <i class="fas fa-star"></i>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-content">
+                  <p class="testimonial-comment">"<%= testimonial.comment %>"</p>
+                  <div class="testimonial-result">
+                    <i class="fas fa-trophy"></i>
+                    <span>성과: <%= testimonial.result %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 일정 및 신청 섹션 -->
+<section id="registration" class="registration-section section-padding">
+  <div class="container">
+    <div class="section-title-wrapper" data-aos="fade-up">
+      <div class="section-subtitle">Registration</div>
+      <h2 class="section-title">일정 선택 및 신청</h2>
+      <p class="section-description">
+        원하는 일정을 선택하여 지금 바로 신청하세요.
+      </p>
+    </div>
+    
+    <div class="schedule-cards">
+      <% seminar.schedule.forEach((schedule, index) => { %>
+        <div class="schedule-card" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+          <div class="schedule-header">
+            <div class="schedule-date">
+              <span class="month"><%= new Date(schedule.date).toLocaleDateString('ko-KR', {month: 'short'}) %></span>
+              <span class="day"><%= new Date(schedule.date).getDate() %></span>
+            </div>
+            <div class="schedule-info">
+              <div class="schedule-time">
+                <i class="fas fa-clock"></i>
+                <%= schedule.time %>
+              </div>
+              <div class="schedule-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <%= schedule.location %>
+              </div>
+            </div>
+          </div>
+          <div class="schedule-body">
+            <div class="availability">
+              <div class="availability-bar">
+                <div class="availability-fill" style="width: <%= (schedule.total - schedule.available) / schedule.total * 100 %>%"></div>
+              </div>
+              <div class="availability-text">
+                <span class="available"><%= schedule.available %>석 남음</span>
+                <span class="total">/ <%= schedule.total %>석</span>
+              </div>
+            </div>
+            <div class="schedule-actions">
+              <% if(schedule.available > 0) { %>
+                <button class="btn-register" data-schedule="<%= schedule.date %>">
+                  <i class="fas fa-calendar-plus"></i>
+                  신청하기
+                </button>
+              <% } else { %>
+                <button class="btn-register disabled" disabled>
+                  <i class="fas fa-ban"></i>
+                  마감
+                </button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    
+    <div class="registration-note" data-aos="fade-up" data-aos-delay="400">
+      <div class="note-card">
+        <h4>신청 안내</h4>
+        <ul>
+          <li>조기등록 할인은 세미나 2주 전까지 적용됩니다.</li>
+          <li>최소 인원 미달 시 일정이 변경될 수 있습니다.</li>
+          <li>취소 및 환불 정책은 이용약관을 참고해주세요.</li>
+          <li>문의사항은 언제든 연락 주시기 바랍니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 섹션 -->
+<section class="seminar-cta section-padding">
+  <div class="container">
+    <div class="cta-content" data-aos="fade-up">
+      <h2 class="cta-title">
+        지금 시작하세요<br>
+        <em>당신의 변화</em>를 위한 첫걸음
+      </h2>
+      <p class="cta-description">
+        더 이상 미루지 마세요. 지금 바로 신청하고 새로운 자신을 발견하는 여정을 시작하세요.
+      </p>
+      <div class="cta-buttons">
+        <a href="#registration" class="btn-daum primary">
+          <i class="fas fa-rocket"></i>
+          세미나 신청하기
+        </a>
+        <a href="/contact" class="btn-daum">
+          <i class="fas fa-phone"></i>
+          문의하기
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 신청 모달 -->
+<div class="modal fade" id="registrationModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">세미나 신청</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <!-- 신청 폼 내용 -->
+        <form id="seminarRegistrationForm">
+          <!-- 폼 필드들 -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

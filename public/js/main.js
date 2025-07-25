@@ -1,6 +1,6 @@
 // 다움연구소 메인 JavaScript
 
-(function() {
+(function () {
     'use strict';
 
     // ==================== 전역 변수 ==================== //
@@ -22,7 +22,12 @@
     };
 
     // ==================== 초기화 ==================== //
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Bootstrap이 로드될 때까지 대기
+        if (typeof bootstrap === 'undefined') {
+            console.error('Bootstrap JavaScript가 로드되지 않았습니다.');
+            return;
+        }
         initializeAll();
     });
 
@@ -40,15 +45,19 @@
     function initializeNavigation() {
         // 스크롤에 따른 헤더 스타일 변경
         window.addEventListener('scroll', throttle(updateHeaderOnScroll, 10));
-        
-        // 모바일 메뉴 자동 닫기
+
+        // 모바일 메뉴 자동 닫기 (Bootstrap 체크 추가)
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
         const navbarCollapse = document.querySelector('.navbar-collapse');
-        
+
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (navbarCollapse.classList.contains('show')) {
-                    bootstrap.Collapse.getInstance(navbarCollapse)?.hide();
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    // Bootstrap 5 방식으로 수정
+                    const bsCollapse = bootstrap.Collapse.getOrCreateInstance(navbarCollapse);
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    }
                 }
             });
         });
@@ -56,10 +65,10 @@
         // 현재 페이지 활성화
         updateActiveNavigation();
     }
-
+    ``
     function updateHeaderOnScroll() {
         const scrolled = window.pageYOffset > 50;
-        
+
         if (elements.header) {
             elements.header.style.backdropFilter = scrolled ? 'blur(10px)' : 'none';
             elements.header.style.backgroundColor = scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 1)';
@@ -74,7 +83,7 @@
     function updateActiveNavigation() {
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item');
-        
+
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href === currentPath || (currentPath === '/' && href === '/')) {
@@ -90,14 +99,14 @@
 
         // 초기 슬라이드 설정
         showSlide(0);
-        
+
         // 자동 슬라이드 시작
         startAutoSlide();
-        
+
         // 이벤트 리스너 등록
         if (elements.prevBtn) elements.prevBtn.addEventListener('click', () => changeSlide(-1));
         if (elements.nextBtn) elements.nextBtn.addEventListener('click', () => changeSlide(1));
-        
+
         elements.dots.forEach((dot, index) => {
             dot.addEventListener('click', () => goToSlide(index));
         });
@@ -121,7 +130,7 @@
             slide.classList.remove('active');
             slide.setAttribute('aria-hidden', 'true');
         });
-        
+
         // 모든 닷 비활성화
         elements.dots.forEach(dot => {
             dot.classList.remove('active');
@@ -133,7 +142,7 @@
             elements.slides[index].classList.add('active');
             elements.slides[index].setAttribute('aria-hidden', 'false');
         }
-        
+
         if (elements.dots[index]) {
             elements.dots[index].classList.add('active');
             elements.dots[index].setAttribute('aria-selected', 'true');
@@ -169,8 +178,8 @@
 
     function handleSlideKeyboard(e) {
         if (!document.querySelector('.slideshow-container:hover')) return;
-        
-        switch(e.key) {
+
+        switch (e.key) {
             case 'ArrowLeft':
                 e.preventDefault();
                 changeSlide(-1);
@@ -196,7 +205,7 @@
         };
 
         const observer = new IntersectionObserver(handleScrollAnimation, observerOptions);
-        
+
         // 애니메이션 요소들 관찰
         document.querySelectorAll('.case-card, .value-card, .business-card, .pricing-card').forEach(el => {
             el.classList.add('animate-on-scroll');
@@ -242,11 +251,11 @@
 
     async function handleNewsletterSubmit(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
         const email = formData.get('email');
-        
+
         if (!validateEmail(email)) {
             showFormMessage(form, '올바른 이메일 주소를 입력해주세요.', 'error');
             return;
@@ -254,10 +263,10 @@
 
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
-        
+
         try {
             setButtonLoading(submitBtn, true);
-            
+
             const response = await fetch('/contact/newsletter', {
                 method: 'POST',
                 headers: {
@@ -267,7 +276,7 @@
             });
 
             const result = await response.json();
-            
+
             if (response.ok && result.success) {
                 showFormMessage(form, '뉴스레터 구독이 완료되었습니다! 감사합니다.', 'success');
                 form.reset();
@@ -284,10 +293,10 @@
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
-        
+
         // 폼 유효성 검사
         if (!validateForm(form)) {
             return;
@@ -295,10 +304,10 @@
 
         const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
         const originalText = submitBtn.textContent || submitBtn.value;
-        
+
         try {
             setButtonLoading(submitBtn, true);
-            
+
             const response = await fetch(form.action || '/contact', {
                 method: 'POST',
                 body: formData
@@ -307,7 +316,7 @@
             if (response.ok) {
                 showFormMessage(form, '문의가 성공적으로 전송되었습니다. 빠른 시간 내에 답변드리겠습니다.', 'success');
                 form.reset();
-                
+
                 // 성공시 페이지 리다이렉트 (선택사항)
                 setTimeout(() => {
                     if (response.redirected) {
@@ -324,7 +333,7 @@
 
     function addFormValidation(form) {
         const requiredFields = form.querySelectorAll('[required]');
-        
+
         requiredFields.forEach(field => {
             field.addEventListener('invalid', (e) => {
                 e.preventDefault();
@@ -336,13 +345,13 @@
     function validateForm(form) {
         let isValid = true;
         const fields = form.querySelectorAll('input, textarea, select');
-        
+
         fields.forEach(field => {
             if (!validateField({ target: field })) {
                 isValid = false;
             }
         });
-        
+
         return isValid;
     }
 
@@ -388,17 +397,17 @@
 
     function showFieldError(field, message) {
         field.classList.add('is-invalid');
-        
+
         let errorElement = field.parentNode.querySelector('.invalid-feedback');
         if (!errorElement) {
             errorElement = document.createElement('div');
             errorElement.className = 'invalid-feedback';
             field.parentNode.appendChild(errorElement);
         }
-        
+
         errorElement.textContent = message;
         errorElement.style.display = 'block';
-        
+
         // 접근성을 위한 ARIA 속성
         field.setAttribute('aria-invalid', 'true');
         field.setAttribute('aria-describedby', errorElement.id || 'error-' + field.name);
@@ -407,12 +416,12 @@
     function clearFieldError(e) {
         const field = e.target;
         field.classList.remove('is-invalid');
-        
+
         const errorElement = field.parentNode.querySelector('.invalid-feedback');
         if (errorElement) {
             errorElement.style.display = 'none';
         }
-        
+
         field.removeAttribute('aria-invalid');
         field.removeAttribute('aria-describedby');
     }
@@ -444,13 +453,13 @@
         const alertDiv = document.createElement('div');
         alertDiv.className = `alert alert-${type === 'error' ? 'danger' : 'success'}`;
         alertDiv.textContent = message;
-        
+
         // 메시지를 폼 상단에 추가
         form.insertBefore(alertDiv, form.firstChild);
-        
+
         // 메시지로 스크롤
         alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
+
         // 3초 후 자동 제거 (성공 메시지만)
         if (type === 'success') {
             setTimeout(() => {
@@ -482,7 +491,7 @@
 
     function throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -511,7 +520,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                
+
                 // 빈 앵커나 페이지 최상단 링크 처리
                 if (href === '#' || href === '#top') {
                     e.preventDefault();
@@ -522,10 +531,10 @@
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
-                    
+
                     const headerHeight = elements.header ? elements.header.offsetHeight : 0;
                     const targetPosition = target.offsetTop - headerHeight - 20;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -556,48 +565,48 @@
 
     function addCardHoverEffects() {
         const cards = document.querySelectorAll('.case-card, .value-card, .business-card, .pricing-card');
-        
+
         cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-10px)';
                 this.style.transition = 'all 0.3s ease';
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0)';
             });
         });
     }
 
     // ==================== 키보드 네비게이션 ==================== //
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         // ESC 키로 모달이나 드롭다운 닫기
         if (e.key === 'Escape') {
-            // 열린 드롭다운 메뉴 닫기
+            // 열린 드롭다운 메뉴 닫기 (수정된 코드)
             const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
             openDropdowns.forEach(dropdown => {
-                const bsDropdown = bootstrap.Dropdown.getInstance(dropdown.previousElementSibling);
-                if (bsDropdown) bsDropdown.hide();
+                const toggle = dropdown.previousElementSibling;
+                if (toggle && toggle.hasAttribute('data-bs-toggle')) {
+                    const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                    if (bsDropdown) {
+                        bsDropdown.hide();
+                    }
+                }
             });
-            
+
             // 열린 모바일 메뉴 닫기
             const openNavbar = document.querySelector('.navbar-collapse.show');
             if (openNavbar) {
-                const bsCollapse = bootstrap.Collapse.getInstance(openNavbar);
-                if (bsCollapse) bsCollapse.hide();
+                const bsCollapse = bootstrap.Collapse.getOrCreateInstance(openNavbar);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
             }
-        }
-        
-        // Ctrl/Cmd + K로 검색 (추후 검색 기능 추가시)
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-            e.preventDefault();
-            // 검색 모달 열기 로직 (추후 구현)
-            console.log('검색 기능은 추후 구현 예정입니다.');
         }
     });
 
     // ==================== 성능 최적화 ==================== //
-    
+
     // 이미지 지연 로딩
     function initializeLazyLoading() {
         if ('IntersectionObserver' in window) {
@@ -619,7 +628,7 @@
     }
 
     // 페이지 가시성 API로 성능 최적화
-    document.addEventListener('visibilitychange', function() {
+    document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
             // 페이지가 숨겨졌을 때 애니메이션 중지
             stopAutoSlide();
@@ -632,7 +641,7 @@
     });
 
     // ==================== 에러 처리 ==================== //
-    window.addEventListener('error', function(e) {
+    window.addEventListener('error', function (e) {
         console.error('JavaScript 오류:', e.error);
         // 프로덕션에서는 에러 로깅 서비스로 전송
         if (typeof gtag !== 'undefined') {
@@ -646,7 +655,7 @@
     // ==================== 브라우저 호환성 체크 ==================== //
     function checkBrowserSupport() {
         const isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > -1;
-        
+
         if (isIE) {
             const message = document.createElement('div');
             message.innerHTML = `
@@ -663,10 +672,10 @@
     }
 
     // ==================== 초기화 완료 후 실행 ==================== //
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         initializeLazyLoading();
         checkBrowserSupport();
-        
+
         // 페이지 로딩 완료 이벤트 발송 (Google Analytics 등)
         if (typeof gtag !== 'undefined') {
             gtag('event', 'page_view', {
@@ -690,7 +699,7 @@
 
 // 성공 사례 페이지 JavaScript
 
-(function() {
+(function () {
     'use strict';
 
     // DOM 요소들
@@ -706,7 +715,7 @@
     let visibleCases = 6; // 처음에 보여줄 사례 수
 
     // 초기화
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         initializeFilters();
         initializeLoadMore();
         initializeAnimations();
@@ -718,7 +727,7 @@
         if (!elements.filterTabs.length) return;
 
         elements.filterTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 const filter = this.dataset.filter;
                 setActiveFilter(this);
                 filterCases(filter);
@@ -771,7 +780,7 @@
     function initializeLoadMore() {
         if (!elements.loadMoreBtn) return;
 
-        elements.loadMoreBtn.addEventListener('click', function() {
+        elements.loadMoreBtn.addEventListener('click', function () {
             loadMoreCases();
         });
     }
@@ -783,7 +792,7 @@
             return item.dataset.category === currentFilter;
         });
 
-        const hiddenCases = filteredCases.filter(item => 
+        const hiddenCases = filteredCases.filter(item =>
             item.style.display === 'none' || item.classList.contains('hidden')
         );
 
@@ -804,7 +813,7 @@
     function updateLoadMoreButton(totalCases) {
         if (!elements.loadMoreBtn) return;
 
-        const visibleCasesCount = Array.from(elements.caseItems).filter(item => 
+        const visibleCasesCount = Array.from(elements.caseItems).filter(item =>
             !item.classList.contains('hidden') && item.style.display !== 'none'
         ).length;
 
@@ -823,7 +832,7 @@
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animationDelay = Math.random() * 0.3 + 's';
@@ -841,17 +850,17 @@
     // 필터 기능을 위한 유틸리티 함수들
     const filterUtils = {
         // 카테고리별 사례 수 계산
-        getCategoryCount: function(category) {
+        getCategoryCount: function (category) {
             if (category === 'all') {
                 return elements.caseItems.length;
             }
-            return Array.from(elements.caseItems).filter(item => 
+            return Array.from(elements.caseItems).filter(item =>
                 item.dataset.category === category
             ).length;
         },
 
         // 검색 기능 (추후 확장용)
-        searchCases: function(query) {
+        searchCases: function (query) {
             const searchResults = Array.from(elements.caseItems).filter(item => {
                 const title = item.querySelector('.case-title').textContent.toLowerCase();
                 const summary = item.querySelector('.case-summary').textContent.toLowerCase();
@@ -886,7 +895,7 @@
 
         // 필터 변경 시 URL 업데이트
         elements.filterTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 const filter = this.dataset.filter;
                 window.history.replaceState(null, null, `#${filter}`);
             });
@@ -897,10 +906,10 @@
     function initializeCaseDetailFeatures() {
         // 읽기 진행률 표시
         initializeReadingProgress();
-        
+
         // 관련 사례 슬라이더 (미니 케이스들)
         initializeMiniCaseSlider();
-        
+
         // 소셜 공유 기능
         initializeSocialShare();
     }
@@ -915,11 +924,11 @@
 
         const progressFill = progressBar.querySelector('.progress-fill');
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrolled = window.pageYOffset;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const progress = (scrolled / maxScroll) * 100;
-            
+
             progressFill.style.width = Math.min(progress, 100) + '%';
         });
     }
@@ -933,7 +942,7 @@
         const container = document.querySelector('.other-cases .row');
         if (container) {
             container.classList.add('mini-case-slider');
-            
+
             // 터치/드래그 이벤트 추가
             let isDown = false;
             let startX;
@@ -1042,9 +1051,9 @@
             z-index: 9999;
             animation: slideInRight 0.3s ease;
         `;
-        
+
         document.body.appendChild(toast);
-        
+
         setTimeout(() => {
             toast.style.animation = 'slideOutRight 0.3s ease';
             setTimeout(() => {
@@ -1082,7 +1091,7 @@
     }
 
     // 키보드 네비게이션 지원
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         // 성공 사례 목록에서 화살표 키로 필터 변경
         if (elements.filterTabs.length > 0) {
             const activeTab = document.querySelector('.filter-tab.active');
@@ -1134,7 +1143,7 @@
     }
 
     // 페이지 가시성 API 활용
-    document.addEventListener('visibilitychange', function() {
+    document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
             // 페이지가 숨겨졌을 때 불필요한 애니메이션 중지
             document.querySelectorAll('.case-card').forEach(card => {
@@ -1151,7 +1160,7 @@
     // 스크롤 위치 기억 기능
     function rememberScrollPosition() {
         const scrollKey = 'successCases_scrollPosition';
-        
+
         // 페이지 로드시 스크롤 위치 복원
         const savedPosition = sessionStorage.getItem(scrollKey);
         if (savedPosition) {
@@ -1168,9 +1177,9 @@
     }
 
     // 에러 처리 및 로깅
-    window.addEventListener('error', function(e) {
+    window.addEventListener('error', function (e) {
         console.error('성공 사례 페이지 에러:', e.error);
-        
+
         // 프로덕션에서는 에러 추적 서비스로 전송
         if (typeof gtag !== 'undefined') {
             gtag('event', 'exception', {
@@ -1182,10 +1191,10 @@
     });
 
     // 초기화 완료 후 추가 기능들 실행
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         initializeLazyLoading();
         rememberScrollPosition();
-        
+
         // Google Analytics 이벤트 (페이지뷰)
         if (typeof gtag !== 'undefined') {
             gtag('event', 'page_view', {

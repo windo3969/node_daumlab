@@ -24,23 +24,228 @@ router.get('/about', (req, res) => {
   });
 });
 
-// 핵심 가치
-router.get('/values', (req, res) => {
-  res.render('pages/values', {
-    title: '핵심 가치 - 다움연구소',
-    description: '정체성, 상생, 가능성의 발견, 탐구와 실행, 사람 중심이라는 다움연구소의 5가지 핵심 가치를 소개합니다.',
-    keywords: '다움연구소, 핵심가치, 정체성, 상생, 가능성',
-    canonical: res.locals.siteUrl + '/values'
+// 세미나 목록 페이지
+router.get('/seminars', (req, res) => {
+  res.render('pages/seminars', {
+    title: '세미나 - 다움연구소',
+    description: '정체성 발견과 성장을 위한 다양한 세미나 프로그램을 만나보세요.',
+    keywords: '세미나, 워크숍, 교육, 정체성, 다움연구소',
+    canonical: res.locals.siteUrl + '/seminars',
+    additionalCSS: ['/css/seminars.css'],
+    additionalJS: ['/js/seminars.js']
   });
 });
 
-// 비전
-router.get('/vision', (req, res) => {
-  res.render('pages/vision', {
-    title: '비전 - 다움연구소',
-    description: '정체성을 찾고 싶은 사람들이 가장 먼저 떠올리는 연구소가 되겠다는 다움연구소의 비전을 소개합니다.',
-    keywords: '다움연구소, 비전, 목표, 미래계획',
-    canonical: res.locals.siteUrl + '/vision'
+// 세미나 상세 페이지
+router.get('/seminars/:seminarId', (req, res) => {
+  const seminarId = req.params.seminarId;
+  
+  // 실제로는 데이터베이스에서 가져올 데이터
+  const seminars = {
+    'identity-discovery': {
+      id: 'identity-discovery',
+      title: '나다움 발견 워크숍',
+      subtitle: 'Identity Discovery Workshop',
+      category: '개인 정체성',
+      duration: '6시간',
+      participants: '8-12명',
+      level: '초급-중급',
+      price: {
+        early: 180000,
+        regular: 220000
+      },
+      description: '진정한 자신을 발견하고 나만의 정체성을 구축하는 6시간의 집중 워크숍입니다.',
+      heroVideo: '/videos/identity-discovery-hero.mp4',
+      heroImage: '/images/seminars/identity-discovery-hero.jpg',
+      highlights: [
+        '개인 가치관 명확화',
+        '강점 및 재능 발견',
+        '비전 및 목표 설정',
+        '실행 로드맵 수립'
+      ],
+      curriculum: [
+        {
+          title: '1부: 나를 아는 시간',
+          duration: '90분',
+          topics: ['자기 인식 진단', '가치관 탐구', '과거 경험 분석'],
+          image: '/images/seminars/part1.jpg'
+        },
+        {
+          title: '2부: 강점 발견하기',
+          duration: '90분',
+          topics: ['강점 분석 테스트', '재능 발굴 워크숍', '피드백 세션'],
+          image: '/images/seminars/part2.jpg'
+        },
+        {
+          title: '3부: 비전 설계하기',
+          duration: '120분',
+          topics: ['비전 설정 워크숍', '목표 수립 방법', '실행 계획 작성'],
+          image: '/images/seminars/part3.jpg'
+        },
+        {
+          title: '4부: 실행 로드맵',
+          duration: '120분',
+          topics: ['개인별 로드맵 설계', '실행 전략 수립', '후속 계획 논의'],
+          image: '/images/seminars/part4.jpg'
+        }
+      ],
+      instructor: {
+        name: '김다움',
+        title: '다움연구소 대표',
+        credential: '정체성 전문 컨설턴트 | 조직심리학 박사',
+        image: '/images/team/kim-daum.jpg',
+        experience: '10년+ 개인 컨설팅 경험',
+        description: '1000명 이상의 개인과 100개 이상의 조직이 자신만의 정체성을 발견할 수 있도록 도왔습니다.'
+      },
+      benefits: [
+        {
+          icon: 'fas fa-compass',
+          title: '명확한 방향성',
+          description: '자신만의 가치관과 비전을 발견하여 인생의 나침반을 얻습니다.'
+        },
+        {
+          icon: 'fas fa-star',
+          title: '강점 활용',
+          description: '숨겨진 재능과 강점을 발견하여 개인 브랜드를 구축합니다.'
+        },
+        {
+          icon: 'fas fa-rocket',
+          title: '실행력 향상',
+          description: '구체적인 실행 계획으로 꿈을 현실로 만드는 방법을 학습합니다.'
+        },
+        {
+          icon: 'fas fa-users',
+          title: '네트워킹',
+          description: '비슷한 목표를 가진 동료들과의 네트워킹 기회를 제공합니다.'
+        }
+      ],
+      testimonials: [
+        {
+          name: '이수진',
+          age: 28,
+          occupation: '마케터',
+          rating: 5,
+          comment: '6시간이 어떻게 지나갔는지 모를 정도로 몰입했어요. 제가 정말 원하는 게 무엇인지 명확해졌습니다.',
+          image: '/images/testimonials/lee-sujin.jpg',
+          result: '새로운 커리어 전환 성공'
+        },
+        {
+          name: '박현우',
+          age: 32,
+          occupation: '프리랜서',
+          rating: 5,
+          comment: '3년간 방황했던 제가 하루 만에 인생의 방향을 찾았어요. 정말 감사합니다.',
+          image: '/images/testimonials/park-hyunwoo.jpg',
+          result: '개인 브랜드 구축 및 수입 30% 증가'
+        },
+        {
+          name: '김영희',
+          age: 25,
+          occupation: '대학원생',
+          rating: 5,
+          comment: '학업과 꿈 사이에서 고민이 많았는데, 두 가지를 조화롭게 병행할 수 있는 방법을 찾았어요.',
+          image: '/images/testimonials/kim-younghee.jpg',
+          result: '명확한 진로 설정 및 시간 관리 개선'
+        }
+      ],
+      schedule: [
+        {
+          date: '2025-08-15',
+          time: '10:00-17:00',
+          location: '강남 다움센터',
+          available: 5,
+          total: 12
+        },
+        {
+          date: '2025-08-29',
+          time: '10:00-17:00',
+          location: '강남 다움센터',
+          available: 3,
+          total: 12
+        },
+        {
+          date: '2025-09-12',
+          time: '10:00-17:00',
+          location: '홍대 다움스튜디오',
+          available: 8,
+          total: 12
+        }
+      ],
+      includes: [
+        '워크북 및 진단 도구',
+        '점심 식사 제공',
+        '개인별 피드백 리포트',
+        '3개월 후속 코칭 세션 1회',
+        '온라인 커뮤니티 액세스'
+      ],
+      gallery: [
+        '/images/seminars/gallery1.jpg',
+        '/images/seminars/gallery2.jpg',
+        '/images/seminars/gallery3.jpg',
+        '/images/seminars/gallery4.jpg',
+        '/images/seminars/gallery5.jpg',
+        '/images/seminars/gallery6.jpg'
+      ]
+    },
+    'personal-branding': {
+      id: 'personal-branding',
+      title: '퍼스널 브랜딩 마스터클래스',
+      subtitle: 'Personal Branding Masterclass',
+      category: '개인 브랜딩',
+      duration: '8시간',
+      participants: '6-10명',
+      level: '중급-고급',
+      price: {
+        early: 350000,
+        regular: 420000
+      },
+      description: '자신만의 고유한 브랜드를 구축하고 시장에서 차별화된 위치를 확보하는 전문 과정입니다.',
+      heroVideo: '/videos/personal-branding-hero.mp4',
+      heroImage: '/images/seminars/personal-branding-hero.jpg',
+      highlights: [
+        '개인 브랜드 전략 수립',
+        '온라인 플랫폼 활용법',
+        '스토리텔링 기법',
+        '네트워킹 전략'
+      ],
+      // ... 추가 데이터 구조는 동일
+    }
+  };
+
+  const seminarData = seminars[seminarId];
+  
+  if (!seminarData) {
+    return res.status(404).render('pages/error', {
+      title: '세미나를 찾을 수 없습니다',
+      error: '요청하신 세미나 정보를 찾을 수 없습니다.',
+      status: 404
+    });
+  }
+
+  res.render('pages/seminar-detail', {
+    title: `${seminarData.title} - 세미나 | 다움연구소`,
+    description: seminarData.description,
+    keywords: `${seminarData.title}, 세미나, 워크숍, ${seminarData.category}, 다움연구소`,
+    canonical: res.locals.siteUrl + `/seminars/${seminarId}`,
+    seminar: seminarData,
+    additionalCSS: ['/css/seminar-detail.css'],
+    additionalJS: ['/js/seminar-detail.js'],
+    // 구조화된 데이터 (SEO)
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": seminarData.title,
+      "description": seminarData.description,
+      "organizer": {
+        "@type": "Organization",
+        "name": "다움연구소"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": seminarData.price.regular,
+        "priceCurrency": "KRW"
+      }
+    }
   });
 });
 
@@ -465,5 +670,6 @@ router.get('/consulting-apply', (req, res) => {
     errors: []
   });
 });
+
 
 module.exports = router;
