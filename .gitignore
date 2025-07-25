@@ -92,3 +92,4 @@ config/production.js
 
 # PM2 ecosystem 파일
 ecosystem.config.js
+.vercel

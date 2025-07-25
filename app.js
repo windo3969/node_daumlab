@@ -165,15 +165,18 @@ app.use((err, req, res, next) => {
   }
 });
 
-// Graceful shutdown 처리
-process.on('SIGTERM', () => {
-  console.log('SIGTERM 신호를 받았습니다. 서버를 안전하게 종료합니다.');
-  process.exit(0);
-});
+// Vercel 환경에서는 graceful shutdown 처리를 하지 않음
+if (!process.env.VERCEL && !process.env.NOW_REGION) {
+  // Graceful shutdown 처리 (로컬 환경에서만)
+  process.on('SIGTERM', () => {
+    console.log('SIGTERM 신호를 받았습니다. 서버를 안전하게 종료합니다.');
+    process.exit(0);
+  });
 
-process.on('SIGINT', () => {
-  console.log('SIGINT 신호를 받았습니다. 서버를 안전하게 종료합니다.');
-  process.exit(0);
-});
+  process.on('SIGINT', () => {
+    console.log('SIGINT 신호를 받았습니다. 서버를 안전하게 종료합니다.');
+    process.exit(0);
+  });
+}
 
 module.exports = app;
