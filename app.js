@@ -14,9 +14,27 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
-      scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://cdn.jsdelivr.net",
+        "https://fonts.googleapis.com",
+        "https://unpkg.com",
+        "https://cdnjs.cloudflare.com"
+      ],
+      // 'data:' 추가
+      fontSrc: [
+        "'self'",
+        "https://fonts.gstatic.com",
+        "https://cdn.jsdelivr.net",
+        "https://cdnjs.cloudflare.com",
+        "data:" // 새로 추가
+      ],
+      scriptSrc: [
+        "'self'",
+        "https://cdn.jsdelivr.net",
+        "https://unpkg.com"
+      ],
       imgSrc: ["'self'", "data:", "https:"],
       connectSrc: ["'self'"]
     }
@@ -25,7 +43,7 @@ app.use(helmet({
 
 // CORS 설정
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
+  origin: process.env.NODE_ENV === 'production'
     ? ['https://daum-institute.kr', 'https://www.daum-institute.kr']
     : ['http://localhost:3000', 'http://127.0.0.1:3000'],
   credentials: true
@@ -77,31 +95,31 @@ app.set('views', path.join(__dirname, 'views'));
 // EJS 레이아웃 엔진 설정 (express-ejs-layouts 사용하지 않고 직접 구현)
 app.use((req, res, next) => {
   const originalRender = res.render;
-  
-  res.render = function(view, options = {}, callback) {
+
+  res.render = function (view, options = {}, callback) {
     // 레이아웃을 사용하지 않는 경우 (예: AJAX 요청)
     if (options.layout === false) {
       return originalRender.call(this, view, options, callback);
     }
-    
+
     // 레이아웃 사용
     const layoutTemplate = options.layout || 'layout';
-    
+
     // 페이지 콘텐츠를 먼저 렌더링
     originalRender.call(this, view, options, (err, html) => {
       if (err) {
         if (callback) return callback(err);
         throw err;
       }
-      
+
       // 레이아웃에 body 변수 추가
       options.body = html;
-      
+
       // 레이아웃 렌더링
       originalRender.call(res, layoutTemplate, options, callback);
     });
   };
-  
+
   next();
 });
 
@@ -141,10 +159,10 @@ app.use((err, req, res, next) => {
 
   // 클라이언트에게 에러 응답
   const status = err.status || 500;
-  const message = process.env.NODE_ENV === 'development' 
-    ? err.message 
-    : status === 404 
-      ? '페이지를 찾을 수 없습니다.' 
+  const message = process.env.NODE_ENV === 'development'
+    ? err.message
+    : status === 404
+      ? '페이지를 찾을 수 없습니다.'
       : '서버 내부 오류가 발생했습니다.';
 
   res.status(status);

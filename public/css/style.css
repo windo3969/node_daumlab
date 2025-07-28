@@ -2341,7 +2341,7 @@ a:hover {
   }
   
   .footer-newsletter .input-group {
-    flex-direction: column;
+    flex-direction:row;
   }
   
   .footer-newsletter .form-control {

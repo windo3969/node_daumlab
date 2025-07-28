@@ -20,7 +20,7 @@ router.get('/about', (req, res) => {
     keywords: '다움연구소, 소개, 핵심가치, 철학, 비전',
     canonical: res.locals.siteUrl + '/about',
     additionalCSS: ['/css/about.css'],
-    additionalJS: ['/js/about.js']
+    additionalJS: ['/js/about.js?v=' + new Date().getFullYear()]
   });
 });
 
