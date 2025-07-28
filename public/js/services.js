@@ -137,27 +137,40 @@ function animateStepNumber(element) {
     }, 100);
 }
 
-// 스무스 스크롤
-function initSmoothScroll() {
-    // 내부 링크 스무스 스크롤
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+// // 스무스 스크롤
+// function initSmoothScroll() {
+//     // 내부 링크 스무스 스크롤
+//     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+//         anchor.addEventListener('click', function(e) {
+//             e.preventDefault();
             
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
+//             // 1. href 값을 가져옵니다.
+//             const href = this.getAttribute('href');
+
+//             // 2. href가 '#'만 있거나 빈 문자열이 아닌지 확인합니다.
+//             if (href && href !== '#') { 
+//                 const target = document.querySelector(href);
                 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
+//                 if (target) {
+//                     const headerOffset = 80;
+//                     const elementPosition = target.offsetTop;
+//                     const offsetPosition = elementPosition - headerOffset;
+                    
+//                     window.scrollTo({
+//                         top: offsetPosition,
+//                         behavior: 'smooth'
+//                     });
+//                 }
+//             } else if (href === '#') {
+//                 // href가 '#'인 경우 페이지 맨 위로 스크롤 (선택 사항)
+//                 window.scrollTo({
+//                     top: 0,
+//                     behavior: 'smooth'
+//                 });
+//             }
+//         });
+//     });
+// }
 
 // 서비스 카드 필터링 (추가 기능)
 function initServiceFilter() {
